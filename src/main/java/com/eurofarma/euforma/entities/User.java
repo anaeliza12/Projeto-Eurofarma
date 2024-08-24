@@ -8,8 +8,6 @@ import java.util.Objects;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import com.github.anaeliza12.FirstProject.entities.Permission;
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -28,15 +26,6 @@ public class User implements UserDetails {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
-
-	@Column(name = "user_name", unique = false, length = 180)
-	private String firstName;
-
-	@Column(name = "last_name", nullable = true, length = 180)
-	private String lastName;
-
-	@Column(nullable = false, length = 180)
-	private String username;
 
 	@Column(nullable = false, length = 180)
 	private String email;
@@ -67,9 +56,6 @@ public class User implements UserDetails {
 			Boolean accountNonExpired, Boolean accountNonLocked, Boolean credentialsNonExpired, Boolean enabled) {
 		super();
 		this.id = id;
-		this.firstName = firstName;
-		this.lastName = lastName;
-		this.username = username;
 		this.email = email;
 		this.password = password;
 		this.accountNonExpired = accountNonExpired;
@@ -90,7 +76,7 @@ public class User implements UserDetails {
 
 	@Override
 	public String getUsername() {
-		return this.username;
+		return this.email;
 	}
 
 	public List<String> getRoles() {
@@ -109,34 +95,10 @@ public class User implements UserDetails {
 		this.id = id;
 	}
 
-	public String getUserName() {
-		return this.username;
-	}
-
-	public void setUsername(String username) {
-		this.username = username;
-	}
-
 	public void setPassword(String password) {
 		this.password = password;
 	}
-
-	public String getFirstName() {
-		return firstName;
-	}
-
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
-	}
-
-	public String getLastName() {
-		return lastName;
-	}
-
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
-	}
-
+	
 	public String getEmail() {
 		return email;
 	}
