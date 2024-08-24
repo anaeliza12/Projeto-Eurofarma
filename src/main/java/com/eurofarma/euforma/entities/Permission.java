@@ -67,5 +67,4 @@ public class Permission implements GrantedAuthority {
 		Permission other = (Permission) obj;
 		return Objects.equals(id, other.id);
 	}
-
 }

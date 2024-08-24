@@ -1,16 +1,24 @@
 package com.eurofarma.euforma.entities;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 import java.util.Objects;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import com.github.anaeliza12.FirstProject.entities.Permission;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -20,16 +28,16 @@ public class User implements UserDetails {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
-	
+
 	@Column(name = "user_name", unique = false, length = 180)
 	private String firstName;
-	
+
 	@Column(name = "last_name", nullable = true, length = 180)
 	private String lastName;
-	
+
 	@Column(nullable = false, length = 180)
 	private String username;
-	
+
 	@Column(nullable = false, length = 180)
 	private String email;
 
@@ -48,8 +56,13 @@ public class User implements UserDetails {
 	@Column(nullable = false)
 	private Boolean enabled;
 
-	public User() {}
-	
+	@ManyToMany(fetch = FetchType.EAGER)
+	@JoinTable(name = "user_permission", joinColumns = @JoinColumn(name = "id_user"), inverseJoinColumns = @JoinColumn(name = "id_permission"))
+	private List<Permission> permissions;
+
+	public User() {
+	}
+
 	public User(Long id, String firstName, String lastName, String username, String email, String password,
 			Boolean accountNonExpired, Boolean accountNonLocked, Boolean credentialsNonExpired, Boolean enabled) {
 		super();
@@ -65,11 +78,9 @@ public class User implements UserDetails {
 		this.enabled = enabled;
 	}
 
-
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
-		// TODO Auto-generated method stub
-		return null;
+		return this.permissions;
 	}
 
 	@Override
@@ -80,6 +91,14 @@ public class User implements UserDetails {
 	@Override
 	public String getUsername() {
 		return this.username;
+	}
+
+	public List<String> getRoles() {
+		List<String> roles = new ArrayList<>();
+		for (Permission p : permissions) {
+			roles.add(p.getDescription());
+		}
+		return roles;
 	}
 
 	public Long getId() {
