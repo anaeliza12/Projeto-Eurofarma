@@ -2,6 +2,8 @@ package com.eurofarma.euforma.entities;
 
 import java.util.Objects;
 
+import com.eurofarma.eurofarma.enums.Status;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;

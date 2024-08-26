@@ -3,8 +3,7 @@ package com.eurofarma.eurofarma.enums;
 public enum Status {
 	PENDENTE(1), 
 	EM_ANDAMENTO(2), 
-	CONCLUIDO(3), 
-	CANCELADO(4);
+	CONCLUIDO(3);
 
 	private final int valor;
 
