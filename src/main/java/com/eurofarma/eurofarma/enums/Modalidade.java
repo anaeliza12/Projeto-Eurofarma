@@ -1,4 +1,4 @@
-package com.eurofarma.euforma.entities;
+package com.eurofarma.eurofarma.enums;
 
 public enum Modalidade {
 	
