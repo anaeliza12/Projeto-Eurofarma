@@ -29,14 +29,17 @@ public class TokenProvider {
 		algorithm = Algorithm.HMAC256(secret);
 	}
 
-	public TokenVO tokenProvider(User user, String accessToken, String refreshToken) {
+	public TokenVO tokenProvider(User user) {
 		Date tokenCreation = new Date();
-		Date tokenExpiration = tokenCreation;
-		TokenVO token = new TokenVO(user.getEmail(), false, tokenCreation, tokenExpiration, accessToken, refreshToken);
-		return token;
+		Date tokenExpiration = new Date(tokenCreation.getTime() + vallidityInMillySeconds);
+		
+		var accessToken = getAccessToken(user, tokenCreation, tokenExpiration);
+		var refreshToken =  getRefreshToken(user, tokenCreation);
+		
+		return new TokenVO(user.getEmail(), true, tokenCreation, tokenExpiration, accessToken, refreshToken);		 
 	}
 	
-	public String accessToken(User user, Date now, Date vallidity) {
+	private String getAccessToken(User user, Date now, Date vallidity) {
 		String issuerUrl = ServletUriComponentsBuilder.fromCurrentContextPath().toUriString();
 		
 		return   JWT.create()
@@ -50,7 +53,7 @@ public class TokenProvider {
 
 	}
 	
-	public String refreshToken(User user, Date now) {
+	private String getRefreshToken(User user, Date now) {
 		Date vallidity = new Date(now.getTime() + (vallidityInMillySeconds * 3));
 		
 		return   JWT.create()
