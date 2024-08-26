@@ -5,34 +5,34 @@ public enum Modalidade {
 	PRESENCIAL(1),
 	ONLINE(2);
 
-	private final int valor;
+	private final int value;
 
-	Modalidade(int valor) {
-		this.valor = valor;
+	Modalidade(int value) {
+		this.value = value;
 	}
 
-	public int getValor() {
-		return valor;
+	public int getValue() {
+		return value;
 	}
 
-	public static Modalidade fromValor(int valor) {
-		for (Modalidade modalidade : Modalidade.values()) {
-			if (modalidade.getValor() == valor) {
-				return modalidade;
+	public static Modalidade fromValue(int value) {
+		for (Modalidade modality : Modalidade.values()) {
+			if (modality.getValue() == value) {
+				return modality;
 			}
 		}
-		throw new IllegalArgumentException("Valor inválido: " + valor);
+		throw new IllegalArgumentException("Valor inválido: " + value);
 	}
 
-	public String getNome() {
+	public String getName() {
 		return this.name();
 	}
 
-	public static Modalidade fromNome(String nome) {
+	public static Modalidade fromName(String name) {
 		try {
-			return Modalidade.valueOf(nome);
+			return Modalidade.valueOf(name);
 		} catch (IllegalArgumentException e) {
-			throw new IllegalArgumentException("Nome inválido: " + nome);
+			throw new IllegalArgumentException("Nome inválido: " + name);
 		}
 	}
 }

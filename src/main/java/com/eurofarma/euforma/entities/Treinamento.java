@@ -11,6 +11,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -24,7 +26,8 @@ public class Treinamento {
 	@Column(name = "nome_treinamento", nullable = false)
 	private String name;
 
-	@Column(name = "departamento", nullable = false)
+	@OneToOne() 
+	@JoinColumn(name = "departamento_id", nullable = false)
 	private Departamento department;
 
 	@Column(name = "duracao", nullable = false)
@@ -39,7 +42,8 @@ public class Treinamento {
 	@Column(name = "descricao", nullable = false)
 	private String description;
 
-	@Column(name = "modalidade", nullable = false)
+	@OneToOne() 
+	@JoinColumn(name = "modalidade", nullable = true)
 	private Modalidade modality;
 
 	@Column(name = "local", nullable = true)
