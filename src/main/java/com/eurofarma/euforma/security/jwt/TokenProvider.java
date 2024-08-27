@@ -3,8 +3,12 @@ package com.eurofarma.euforma.security.jwt;
 import java.util.Base64;
 import java.util.Date;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.auth0.jwt.JWT;
@@ -23,6 +27,9 @@ public class TokenProvider {
 
 	@Value("${spring.jwt.expire.length:3600000")
 	private long vallidityInMillySeconds = 3600000;
+	
+	@Autowired
+	private UserDetailsService userDetailsService;
 
 	private Algorithm algorithm;
 
@@ -66,8 +73,10 @@ public class TokenProvider {
 				.strip();			
 	}
 	
-	private Authentication getAuthentication(String token) {
-		DecodedJWT DecodeToken = 
+	public Authentication getAuthentication(String token) {
+		DecodedJWT decodedJWT = decodeToken(token);
+		UserDetails userDetails = userDetailsService.loadUserByUsername(decodedJWT.getSubject());
+		return new UsernamePasswordAuthenticationToken(userDetails, "", userDetails.getAuthorities());	
 	}
 	
 	private DecodedJWT decodeToken(String token) {
