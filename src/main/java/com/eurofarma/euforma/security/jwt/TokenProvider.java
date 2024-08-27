@@ -16,9 +16,12 @@ import com.auth0.jwt.JWTVerifier;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.interfaces.DecodedJWT;
 import com.eurofarma.euforma.entities.User;
+import com.eurofarma.euforma.exception.InvalidJwtAuthenticationException;
 import com.eurofarma.euforma.security.vo.TokenVO;
 
+
 import jakarta.annotation.PostConstruct;
+import jakarta.servlet.http.HttpServletRequest;
 
 public class TokenProvider {
 
@@ -27,7 +30,7 @@ public class TokenProvider {
 
 	@Value("${spring.jwt.expire.length:3600000")
 	private long vallidityInMillySeconds = 3600000;
-	
+
 	@Autowired
 	private UserDetailsService userDetailsService;
 
@@ -42,47 +45,58 @@ public class TokenProvider {
 	public TokenVO tokenProvider(User user) {
 		Date tokenCreation = new Date();
 		Date tokenExpiration = new Date(tokenCreation.getTime() + vallidityInMillySeconds);
-		
+
 		var accessToken = getAccessToken(user, tokenCreation, tokenExpiration);
-		var refreshToken =  getRefreshToken(user, tokenCreation);
-		
-		return new TokenVO(user.getEmail(), true, tokenCreation, tokenExpiration, accessToken, refreshToken);		 
+		var refreshToken = getRefreshToken(user, tokenCreation);
+
+		return new TokenVO(user.getEmail(), true, tokenCreation, tokenExpiration, accessToken, refreshToken);
 	}
-	
+
 	private String getAccessToken(User user, Date now, Date vallidity) {
 		String issuerUrl = ServletUriComponentsBuilder.fromCurrentContextPath().toUriString();
-		
-		return   JWT.create()
-				.withSubject(user.getEmail())
-				.withClaim("roles", user.getRoles())
-				.withIssuedAt(now)
-				.withExpiresAt(vallidity)
-				.withIssuer(issuerUrl)
-				.sign(algorithm)
-				.strip();			
+
+		return JWT.create().withSubject(user.getEmail()).withClaim("roles", user.getRoles()).withIssuedAt(now)
+				.withExpiresAt(vallidity).withIssuer(issuerUrl).sign(algorithm).strip();
 
 	}
-	
+
 	private String getRefreshToken(User user, Date now) {
 		Date vallidity = new Date(now.getTime() + (vallidityInMillySeconds * 3));
-		
-		return   JWT.create()
-				.withSubject(user.getEmail())
-				.withExpiresAt(vallidity)
-				.sign(algorithm)
-				.strip();			
+
+		return JWT.create().withSubject(user.getEmail()).withExpiresAt(vallidity).sign(algorithm).strip();
 	}
-	
+
 	public Authentication getAuthentication(String token) {
-		DecodedJWT decodedJWT = decodeToken(token);
+		DecodedJWT decodedJWT = decodedToken(token);
 		UserDetails userDetails = userDetailsService.loadUserByUsername(decodedJWT.getSubject());
-		return new UsernamePasswordAuthenticationToken(userDetails, "", userDetails.getAuthorities());	
+		return new UsernamePasswordAuthenticationToken(userDetails, "", userDetails.getAuthorities());
 	}
-	
-	private DecodedJWT decodeToken(String token) {
+
+	private DecodedJWT decodedToken(String token) {
 		Algorithm alg = Algorithm.HMAC256(secretKey.getBytes());
 		JWTVerifier verifier = JWT.require(alg).build();
 		DecodedJWT decodedToken = verifier.verify(token);
 		return decodedToken;
+	}
+
+	public String resolveToken(HttpServletRequest req) {
+		String bearerToken = req.getHeader("Authorization");
+
+		if (bearerToken != null && bearerToken.startsWith("Bearer ")) {
+			return bearerToken.substring("Bearer ".length());
+		}
+		return null;
+	}
+
+	public boolean validateToken(String token) {
+		DecodedJWT decodedJWT = decodedToken(token);
+		try {
+			if (decodedJWT.getExpiresAt().before(new Date())) {
+				return false;
+			}
+			return true;
+		} catch (Exception e) {
+			throw new InvalidJwtAuthenticationException("Expired or invalid JWT token!");
+		}
 	}
 }
