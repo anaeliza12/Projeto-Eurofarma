@@ -2,6 +2,7 @@ package com.eurofarma.euforma.entities;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.List;
 import java.util.Objects;
 
 import com.eurofarma.eurofarma.enums.Modalidade;
@@ -12,6 +13,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
@@ -26,7 +28,7 @@ public class Treinamento {
 	@Column(name = "nome_treinamento", nullable = false)
 	private String name;
 
-	@OneToOne() 
+	@OneToOne()
 	@JoinColumn(name = "departamento_id", nullable = false)
 	private Departamento department;
 
@@ -42,12 +44,15 @@ public class Treinamento {
 	@Column(name = "descricao", nullable = false)
 	private String description;
 
-	@OneToOne() 
+	@OneToOne()
 	@JoinColumn(name = "modalidade", nullable = true)
 	private Modalidade modality;
 
 	@Column(name = "local", nullable = true)
 	private String local;
+
+	@OneToMany(mappedBy = "training")
+	private List<UsuarioTreinamento> users;
 
 	public Treinamento() {
 	}
