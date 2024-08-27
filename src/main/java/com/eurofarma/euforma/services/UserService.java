@@ -1,17 +1,22 @@
 package com.eurofarma.euforma.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.stereotype.Service;
 
-import com.eurofarma.euforma.entities.User;
 import com.eurofarma.euforma.repositories.UserRepository;
 
-public class UserService {
-	
+@Service
+public class UserService implements UserDetailsService {
+
 	@Autowired
 	private UserRepository repository;
-	
-	public User findByEmail(String email) {
-		return repository.findByEmail(email);
-	}
 
+	@Override
+	public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+		UserDetails user = repository.findByEmail(email);
+		return user;
+	}
 }
