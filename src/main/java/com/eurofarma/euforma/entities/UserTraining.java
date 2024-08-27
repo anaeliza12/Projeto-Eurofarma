@@ -14,7 +14,7 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "usuario_treinamento")
-public class UsuarioTreinamento {
+public class UserTraining {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -26,14 +26,14 @@ public class UsuarioTreinamento {
 
 	@ManyToOne
 	@JoinColumn(name = "treinamento_id")
-	private Treinamento training;
+	private Training training;
 
 	private Status status;
 
-	public UsuarioTreinamento() {
+	public UserTraining() {
 	}
 
-	public UsuarioTreinamento(Long id, User user, Treinamento training, Status status) {
+	public UserTraining(Long id, User user, Training training, Status status) {
 		this.id = id;
 		this.user = user;
 		this.training = training;
@@ -56,11 +56,11 @@ public class UsuarioTreinamento {
 		this.user = user;
 	}
 
-	public Treinamento getTraining() {
+	public Training getTraining() {
 		return training;
 	}
 
-	public void setTraining(Treinamento training) {
+	public void setTraining(Training training) {
 		this.training = training;
 	}
 
@@ -85,7 +85,7 @@ public class UsuarioTreinamento {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		UsuarioTreinamento other = (UsuarioTreinamento) obj;
+		UserTraining other = (UserTraining) obj;
 		return Objects.equals(id, other.id);
 	}
 }

@@ -11,7 +11,7 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "departamentos")
-public class Departamento {
+public class Departament {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -20,10 +20,10 @@ public class Departamento {
 	@Column(name = "nome", nullable = false)
 	private String name;
 
-	public Departamento() {
+	public Departament() {
 	}
 
-	public Departamento(Long id, String name) {
+	public Departament(Long id, String name) {
 		this.id = id;
 		this.name = name;
 	}
@@ -57,7 +57,7 @@ public class Departamento {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Departamento other = (Departamento) obj;
+		Departament other = (Departament) obj;
 		return Objects.equals(id, other.id);
 	}
 }

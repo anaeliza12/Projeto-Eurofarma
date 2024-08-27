@@ -19,7 +19,7 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "treinamentos")
-public class Treinamento {
+public class Training {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -30,7 +30,7 @@ public class Treinamento {
 
 	@OneToOne()
 	@JoinColumn(name = "departamento_id", nullable = false)
-	private Departamento department;
+	private Departament department;
 
 	@Column(name = "duracao", nullable = false)
 	private String duration;
@@ -52,12 +52,12 @@ public class Treinamento {
 	private String local;
 
 	@OneToMany(mappedBy = "training")
-	private List<UsuarioTreinamento> users;
+	private List<UserTraining> users;
 
-	public Treinamento() {
+	public Training() {
 	}
 
-	public Treinamento(Long id, String name, Departamento department, String duration, LocalDate date, LocalTime time,
+	public Training(Long id, String name, Departament department, String duration, LocalDate date, LocalTime time,
 			String description, Modalidade modality, String local) {
 		this.id = id;
 		this.name = name;
@@ -86,11 +86,11 @@ public class Treinamento {
 		this.name = name;
 	}
 
-	public Departamento getDepartment() {
+	public Departament getDepartment() {
 		return department;
 	}
 
-	public void setDepartment(Departamento department) {
+	public void setDepartment(Departament department) {
 		this.department = department;
 	}
 
@@ -155,7 +155,7 @@ public class Treinamento {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Treinamento other = (Treinamento) obj;
+		Training other = (Training) obj;
 		return Objects.equals(id, other.id);
 	}
 

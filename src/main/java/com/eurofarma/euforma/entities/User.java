@@ -20,7 +20,7 @@ import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "users")
+@Table(name = "usuarios")
 public class User implements UserDetails {
 
 	private static final long serialVersionUID = 1L;
