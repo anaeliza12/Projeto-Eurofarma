@@ -9,6 +9,6 @@ import com.eurofarma.euforma.entities.User;
 
 public interface UserRepository extends JpaRepository<UserRepository, Long> {
 
-	@Query("SELECT u FROM User u WHERE userName =:userName")
-	User findByUsername(@Param("userName") String userName);
+	@Query("SELECT u FROM Usuarios u WHERE email =:email")
+	User findByEmail(@Param("email") String email);
 }
