@@ -42,7 +42,7 @@ public class TokenProvider {
 		algorithm = Algorithm.HMAC256(secret);
 	}
 
-	public TokenVO tokenProvider(User user) {
+	public TokenVO createAccessToken(User user) {
 		Date tokenCreation = new Date();
 		Date tokenExpiration = new Date(tokenCreation.getTime() + vallidityInMillySeconds);
 

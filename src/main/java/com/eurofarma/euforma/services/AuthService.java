@@ -10,6 +10,8 @@ import org.springframework.stereotype.Service;
 
 import com.eurofarma.euforma.repositories.UserRepository;
 import com.eurofarma.euforma.security.jwt.TokenProvider;
+import com.eurofarma.euforma.security.vo.AccountCredencialsVO;
+import com.eurofarma.euforma.security.vo.TokenVO;
 
 
 @Service
@@ -27,7 +29,7 @@ public class AuthService {
 	@SuppressWarnings("rawtypes")
 	public ResponseEntity signIn(AccountCredencialsVO data) {
 		try {
-			var email = data.getE();
+			var email = data.getEmail();
 			var password = data.getPassword();
 
 			authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(email, password));
@@ -37,8 +39,7 @@ public class AuthService {
 			var tokenResponse = new TokenVO();
 
 			if (user != null) {
-				tokenResponse = tokenProvider.createAccessToken(email, user.getRoles());
-
+				tokenResponse = tokenProvider.createAccessToken(user);
 			} else {
 				throw new UsernameNotFoundException("Username " + email + " not found!");
 			}
