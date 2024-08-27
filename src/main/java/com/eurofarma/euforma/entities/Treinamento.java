@@ -59,7 +59,6 @@ public class Treinamento {
 
 	public Treinamento(Long id, String name, Departamento department, String duration, LocalDate date, LocalTime time,
 			String description, Modalidade modality, String local) {
-		super();
 		this.id = id;
 		this.name = name;
 		this.department = department;

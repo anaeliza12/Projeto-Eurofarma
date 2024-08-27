@@ -4,10 +4,13 @@ import java.util.Base64;
 import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.auth0.jwt.JWT;
+import com.auth0.jwt.JWTVerifier;
 import com.auth0.jwt.algorithms.Algorithm;
+import com.auth0.jwt.interfaces.DecodedJWT;
 import com.eurofarma.euforma.entities.User;
 import com.eurofarma.euforma.security.vo.TokenVO;
 
@@ -61,5 +64,16 @@ public class TokenProvider {
 				.withExpiresAt(vallidity)
 				.sign(algorithm)
 				.strip();			
+	}
+	
+	private Authentication getAuthentication(String token) {
+		DecodedJWT DecodeToken = 
+	}
+	
+	private DecodedJWT decodeToken(String token) {
+		Algorithm alg = Algorithm.HMAC256(secretKey.getBytes());
+		JWTVerifier verifier = JWT.require(alg).build();
+		DecodedJWT decodedToken = verifier.verify(token);
+		return decodedToken;
 	}
 }
