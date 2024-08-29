@@ -14,7 +14,7 @@ import jakarta.persistence.Table;
 public class Departament {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
 	@Column(name = "nome", nullable = false)

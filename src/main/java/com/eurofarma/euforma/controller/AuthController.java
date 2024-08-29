@@ -12,14 +12,14 @@ import com.eurofarma.euforma.security.vo.AccountCredencialsVO;
 import com.eurofarma.euforma.services.AuthService;
 
 @RestController
-@RequestMapping(name = "/eurofarma")
+@RequestMapping(name = "/api-eurofarma")
 public class AuthController {
 
 	@Autowired
 	AuthService authService;
 
 	@PostMapping(value = "/v1/login")
-	public ResponseEntity signIn(@RequestBody AccountCredencialsVO data) {
+	public ResponseEntity login(@RequestBody AccountCredencialsVO data) {
 		if (checkIfParamIsNotNull(data)) {
 			return ResponseEntity.status(HttpStatus.FORBIDDEN).body("Invalid client request");
 		}
