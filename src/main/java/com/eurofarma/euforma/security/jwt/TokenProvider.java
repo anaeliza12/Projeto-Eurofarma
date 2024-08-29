@@ -1,6 +1,7 @@
 package com.eurofarma.euforma.security.jwt;
 
 import java.util.Base64;
+
 import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +10,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.auth0.jwt.JWT;
@@ -22,13 +24,13 @@ import com.eurofarma.euforma.security.vo.TokenVO;
 
 import jakarta.annotation.PostConstruct;
 import jakarta.servlet.http.HttpServletRequest;
-
+@Service
 public class TokenProvider {
 
 	@Value("${spring.jwt.secret.key:secret}")
 	private String secretKey;
 
-	@Value("${spring.jwt.expire.length:3600000")
+	@Value("${spring.jwt.expire.length:3600000}")
 	private long vallidityInMillySeconds = 3600000;
 
 	@Autowired
