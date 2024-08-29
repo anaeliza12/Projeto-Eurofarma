@@ -44,9 +44,7 @@ public class Training {
 	@Column(name = "descricao", nullable = false)
 	private String description;
 
-	@OneToOne()
-	@JoinColumn(name = "modalidade", nullable = true)
-	private Modalidade modality;
+	private String modality;
 
 	@Column(name = "local", nullable = true)
 	private String local;
@@ -66,7 +64,7 @@ public class Training {
 		this.date = date;
 		this.time = time;
 		this.description = description;
-		this.modality = modality;
+		setModality(modality);
 		this.local = local;
 	}
 
@@ -126,12 +124,14 @@ public class Training {
 		this.description = description;
 	}
 
-	public Modalidade getModality() {
-		return modality;
+	public Modalidade getModality(String modallity) {
+		return Modalidade.fromValue(modallity);
 	}
 
 	public void setModality(Modalidade modality) {
-		this.modality = modality;
+		if(this.modality != null) {
+			this.modality = modality.getName();			
+		}		
 	}
 
 	public String getLocal() {

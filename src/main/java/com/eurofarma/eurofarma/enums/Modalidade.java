@@ -2,20 +2,20 @@ package com.eurofarma.eurofarma.enums;
 
 public enum Modalidade {
 	
-	PRESENCIAL(1),
-	ONLINE(2);
+	PRESENCIAL("Presencial"),
+	ONLINE("On-line");
 
-	private final int value;
+	private final String value;
 
-	Modalidade(int value) {
+	Modalidade(String value) {
 		this.value = value;
 	}
 
-	public int getValue() {
+	public String getValue() {
 		return value;
 	}
 
-	public static Modalidade fromValue(int value) {
+	public static Modalidade fromValue(String value) {
 		for (Modalidade modality : Modalidade.values()) {
 			if (modality.getValue() == value) {
 				return modality;

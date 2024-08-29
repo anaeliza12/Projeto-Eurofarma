@@ -28,7 +28,7 @@ public class UserTraining {
 	@JoinColumn(name = "treinamento_id")
 	private Training training;
 
-	private Status status;
+	private String status;
 
 	public UserTraining() {
 	}
@@ -37,7 +37,7 @@ public class UserTraining {
 		this.id = id;
 		this.user = user;
 		this.training = training;
-		this.status = status;
+		setStatus(status);
 	}
 
 	public Long getId() {
@@ -64,12 +64,14 @@ public class UserTraining {
 		this.training = training;
 	}
 
-	public Status getStatus() {
-		return status;
+	public Status getStatus(String value) {
+		return Status.fromValue(value);
 	}
 
 	public void setStatus(Status status) {
-		this.status = status;
+		if(this.status != null) {
+			this.status = status.getValue();			
+		}
 	}
 
 	@Override

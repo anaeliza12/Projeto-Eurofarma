@@ -1,23 +1,24 @@
 package com.eurofarma.eurofarma.enums;
 
 public enum Status {
-	PENDENTE(1), 
-	EM_ANDAMENTO(2), 
-	CONCLUIDO(3);
+	
+	PENDENTE("Pendente"), 
+	EM_ANDAMENTO("Em andamento"), 
+	CONCLUIDO("Concluído");
 
-	private final int valor;
+	private final String valor;
 
-	Status(int valor) {
+	Status(String valor) {
 		this.valor = valor;
 	}
 
-	public int getValor() {
+	public String getValue() {
 		return valor;
 	}
 
-	public static Status fromValor(int valor) {
+	public static Status fromValue(String valor) {
 		for (Status status : Status.values()) {
-			if (status.getValor() == valor) {
+			if (status.getValue() == valor) {
 				return status;
 			}
 		}

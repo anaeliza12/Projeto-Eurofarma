@@ -49,5 +49,4 @@ public class AuthService {
 			throw new BadCredentialsException("Invalid username/password supplied!");
 		}
 	}
-
 }
