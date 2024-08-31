@@ -1,79 +1,215 @@
-# modelo-README.md
-Modelo (template) de README para utilizar nas documentações dos seus projetos no GitHub. Deixe sua ⭐ se curtiu o template, para ficar salvo e utilizar depois.
+<div align="center"> <h1>Eurofarma Training Managment</h1>
+  
+![logo_eurofarma (1)](https://github.com/user-attachments/assets/57fec90d-fc6f-4c3a-9d3e-f24c3e49bfbb)
+</div>
 
-# Título/Nome do projeto
+## 📑 About the project 
+API developed for training management at Eurofarma company. Currently, the trainings are carried out manually without a centralized system for storing it. This project includes carrying out the entire training registration flow, as well as access to the training in which the user has signed up. We will have an ADMIN profile to register the training, and a USER profile to register and have access to each of them.
 
-Descreva brevemente o seu projeto. Aqui você pode utilizar texto e também imagens/diagramas.
+<br>
 
-* O [Mermaid](https://mermaid.live/edit#pako:eNpVkE1uwjAQha9izapIZFGWWVSCBFZUVCq7mMXInjSW_Fdji6Ikp2HRg3CxmmRDZzV633uj0etBOElQQqvdRXQYIjvW3LI862bttRJ4_73fHHs9saJ4GwJ9JzrHgW1enulqMWc2DxOr-u0PGa_dOKvVFD1YGljd7NFH50_P5HhxA9s26qNzlv6TLlBO7ZoWyxYLgYFVGCYLLMFQMKhk_r5_KBxiR4Y4lHmV1GLSkQO3Y7Ziiu7zagWUMSRaQvISI9UKvwIayLf1OaskVXThfW5kKmb8AyAeX3o) é uma opção bem legal para diagramas e você consegue utilizar diretamente no README.md:
+## 🔎 Domain Model 
 
-[![](https://mermaid.ink/img/pako:eNpVkE1uwjAQha9izapIZFGWWVSCBFZUVCq7mMXInjSW_Fdji6Ikp2HRg3CxmmRDZzV633uj0etBOElQQqvdRXQYIjvW3LI862bttRJ4_73fHHs9saJ4GwJ9JzrHgW1enulqMWc2DxOr-u0PGa_dOKvVFD1YGljd7NFH50_P5HhxA9s26qNzlv6TLlBO7ZoWyxYLgYFVGCYLLMFQMKhk_r5_KBxiR4Y4lHmV1GLSkQO3Y7Ziiu7zagWUMSRaQvISI9UKvwIayLf1OaskVXThfW5kKmb8AyAeX3o?type=png)](https://mermaid.live/edit#pako:eNpVkE1uwjAQha9izapIZFGWWVSCBFZUVCq7mMXInjSW_Fdji6Ikp2HRg3CxmmRDZzV633uj0etBOElQQqvdRXQYIjvW3LI862bttRJ4_73fHHs9saJ4GwJ9JzrHgW1enulqMWc2DxOr-u0PGa_dOKvVFD1YGljd7NFH50_P5HhxA9s26qNzlv6TLlBO7ZoWyxYLgYFVGCYLLMFQMKhk_r5_KBxiR4Y4lHmV1GLSkQO3Y7Ziiu7zagWUMSRaQvISI9UKvwIayLf1OaskVXThfW5kKmb8AyAeX3o)
+![Class Diagram0](https://github.com/user-attachments/assets/614aa02f-92f0-4ab8-a589-2f00f0805427)
 
-- No site, vá no campo: Actions > Copy Markdown. Copie o link e cole no seu arquivo README.md e o diagrama estará lá.
+<br>
 
 
-### Tecnologias Utilizadas
 
-Liste as tecnologias (linguagens, ferramentas, bibliotecas) que você utilizou para elaborar o projeto. Essa parte é importante para quando um recrutador (que não tem conhecimento de programação) acessar o seu projeto, ele vai saber só olhando a documentação quais tecnologias você já conhece!
+## 💻 How to run the project 
 
-Exemplo:
-* [Golang](https://github.com/golang/go)
-* [Docker](https://www.docker.com/)
-* [MySQL](https://www.mysql.com/)
 
-## Dependências e Versões Necessárias
-
-Liste as dependências necessárias para rodar o projeto e as versões que você utilizou.
-
-* Docker - Versão: X.X
-
-## Como rodar o projeto ✅
-
-Descreva o passo a passo necessário para rodar sua aplicação. Lembre-se: a pessoa nunca rodou seu projeto. Não tenha medo de detalhar o máximo possível. Isso é necessário!
-
-Uma boa forma de descrever o passo a passo é:
+```bash
+# Clone the project
+git clone https://github.com/anaeliza12/Projeto-Eurofarma.git
 
 ```
-Comando 1
+
+
+```bash
+# Run the project
+mvn spring-boot:run
 ```
 
-Depois, rode o seguinte comando:
+<br>
+
+##  <img src="https://www.vectorlogo.zone/logos/getpostman/getpostman-icon.svg" alt="postman" width="23" height="23"/>   Testing with Postman 
+
+## Profile: Admin
+### Auth
+Send a **POST** Request to `http://localhost:8080/api-eurofarma/v1/login` to log in the site
+
+**Admin Object DTO**
+```json
+{
+      "id": "1",
+      "email": "anne.santos@eurofarma.com.br",
+      "password": "123admin"
+}
 
 ```
-Comando 2
+<br>
+
+### Trainings
+Send a **POST** Request to `http://localhost:8080/api-eurofarma/v1/trainings` to return all avaible training
+
+**Training Object**
+```json
+{
+      "id": "7",
+      "name": "Auditoria de Qualidade",
+      "department": 4,
+      "duration": "50min",
+      "date": "2025-02-08",
+      "time": "15:50:00",
+      "description": "Técnicas e procedimentos para realizar auditorias de qualidade, identificando não conformidades e oportunidades de melhoria.",
+      "modality": "On-line",
+      "local": "Teams"
+}
+
 ```
 
-Deixe claro como a pessoa pode confirmar que a aplicação está rodando da forma correta. Pode ser com prints ou a mensagem que ela deve esperar.
 
-## Como rodar os testes
+<br> 
 
-Explique como rodar os testes da aplicação. Exemplo de um comando usando Makefile para rodar os testes:
+## Profile: User
+### Auth
+Send a **POST** Request to `http://localhost:8080/api-eurofarma/v1/login` to log in the site
+
+**User Object DTO**
+```json
+{
+      "id": "4",
+      "email": "maria.silva@eurofarma.com.br",
+      "password": "123maria"
+
+}
 
 ```
-make test
+
+<br>
+
+### My Trainings
+Send a **GET** Request to `http://localhost:8080/api-eurofarma/v1/my-trainings` to return all trainings subscribed by the corresponding user
+
+**UserTraining Object**
+```json
+{
+      "id": "7",
+      "name": "Auditoria de Qualidade",
+      "department": 4,
+      "duration": "50min",
+      "date": "2025-02-08",
+      "time": "15:50:00",
+      "description": "Técnicas e procedimentos para realizar auditorias de qualidade, identificando não conformidades e oportunidades de melhoria.",
+      "modality": "On-line",
+      "local": "Teams",
+      "status": "Em andamento" 
+}
+
+```
+<br> 
+
+### 📥 Download the collection !
+
+
+[![Run Eurofarma collection in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/28811195-e12e9528-6d10-4de2-9b85-06c949a5ea8d)
+
+<br> 
+
+
+
+
+# 📂 Project File Tree
+
+```
+Projeto-Eurofarma/src/main/java/com/eurofarma/eurofarma
+├── config
+│   └── DataConfig.java
+│   └── SecurityConfig.java
+│  
+├── controller
+│   └── AuthController.java
+│   └── 
+│  
+├── entities
+│   └── Departament.java
+│   └── Permission.java
+│   └── Training.java
+│   └── User.java
+│   └── UserTraining.java
+|
+│── exception
+│       ├── handler
+│           └── CustumizedRespondeEntityExceptionHanldler.java
+│   └── InvalidJwtAuthenticationException.java 
+|
+│── repositories
+│       └── DepartamentRepository.java
+│       └── TrainingRepository.java
+│       └── UserRepository.java
+│       └── UserTrainingRepository.java
+|
+│── security
+│       ├── jwt
+│           └── TokenFilter.java
+│           └── TokenProvider.java
+│       ├── vo
+│           └── AccountCredencialsVO.java
+│           └── TokenVO.java
+│ 
+|── services
+        └── AuthService.java
+        └── UserService.java
 ```
 
-## 📌 (Título) - Informações importantes sobre a aplicação (exemplo) 📌
 
-Esse é o local para você preencher com outras informações que possam ser importantes para a aplicação. Coloquei um exemplo de título, mas você deve preencher de acordo com a necessidade do projeto. Pode ser que não seja necessário.
+## <img src="https://github.com/user-attachments/assets/c987ba08-8ca4-44c3-ab75-2b823579b827" width="23" height="23"/>  Swagger links
+swagger.json:
+```
+http://localhost:8080/swagger-ui/index.html
+```
+swagger-ui:
+```
+http://localhost:8080/swagger-ui/v2/api-docs
+```
 
-Um bom exemplo: se você estiver construindo uma API, liste as rotas da aplicação e quais serão os seus retornos. Isso facilita para quem vai consumir a API.
+## ✅ JWT Token
+
+```json
+{
+  "roles": [
+    "ADMIN",
+    "MANAGER"
+  ],
+  "iat": 1724324000,
+  "exp": 1724327600,
+  "sub": "ana",
+  "iss": "http://localhost:8080"
+}
+
+```
+
+## 🛠 Tech Stack
+
+#### Languages
+- Java with SpringBoot
+- SQL
+
+#### External Libraries
+- JPA/Hibernate
+- Spring Security
+- HATEOAS
+- JWT
+- Swagger
+
+#### Containerization Tool
+- Docker
+  
+#### Architecture
+- Layered Architecture
+
+## 📌Adicional Information
+For testing purposes, data insertion scripts for all tables were made available
 
 
-## ⚠️ Problemas enfrentados
-
-Liste os problemas que você enfrentou construindo a aplicação e como você resolveu cada um deles. Você que desenvolveu o projeto é a pessoa que mais conhece/entende os possíveis problemas que uma pessoa pode enfrentar rodando a aplicação. Compartilhe esse conhecimento e facilite a vida da pessoa descrevendo-os.
-
-Exemplo:
-
-### Problema 1:
-Descrição do problema
-* Como solucionar: explicar a solução.
-
-### Problema 2:
-Descrição do problema
-* Como solucionar: explicar a solução.
-
-## ⏭️ Próximos passos
-
-Descreva se você pretende, pensou ou gostaria de elaborar uma nova feature para o seu projeto definindo os próximos passos.
