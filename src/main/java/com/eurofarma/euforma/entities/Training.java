@@ -5,7 +5,7 @@ import java.time.LocalTime;
 import java.util.List;
 import java.util.Objects;
 
-import com.eurofarma.eurofarma.enums.Modalidade;
+import com.eurofarma.eurofarma.enums.Modality;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -58,7 +58,7 @@ public class Training {
 	}
 
 	public Training(Long id, String name, Departament department, String duration, LocalDate date, LocalTime time,
-			String description, Modalidade modality, String local) {
+			String description, Modality modality, String local) {
 		this.id = id;
 		this.name = name;
 		this.department = department;
@@ -126,11 +126,11 @@ public class Training {
 		this.description = description;
 	}
 
-	public Modalidade getModality(String modallity) {
-		return Modalidade.fromValue(modallity);
+	public Modality getModality(String modallity) {
+		return Modality.fromValue(modallity);
 	}
 
-	public void setModality(Modalidade modality) {
+	public void setModality(Modality modality) {
 		if(this.modality != null) {
 			this.modality = modality.getName();			
 		}		
