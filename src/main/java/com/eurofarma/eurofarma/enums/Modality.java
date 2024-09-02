@@ -1,13 +1,13 @@
 package com.eurofarma.eurofarma.enums;
 
-public enum Modalidade {
+public enum Modality {
 	
 	PRESENCIAL("Presencial"),
 	ONLINE("On-line");
 
 	private final String value;
 
-	Modalidade(String value) {
+	Modality(String value) {
 		this.value = value;
 	}
 
@@ -15,8 +15,8 @@ public enum Modalidade {
 		return value;
 	}
 
-	public static Modalidade fromValue(String value) {
-		for (Modalidade modality : Modalidade.values()) {
+	public static Modality fromValue(String value) {
+		for (Modality modality : Modality.values()) {
 			if (modality.getValue() == value) {
 				return modality;
 			}
@@ -28,9 +28,9 @@ public enum Modalidade {
 		return this.name();
 	}
 
-	public static Modalidade fromName(String name) {
+	public static Modality fromName(String name) {
 		try {
-			return Modalidade.valueOf(name);
+			return Modality.valueOf(name);
 		} catch (IllegalArgumentException e) {
 			throw new IllegalArgumentException("Nome inválido: " + name);
 		}
