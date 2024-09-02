@@ -37,9 +37,9 @@ public class SecurityConfig {
 		        .addFilterBefore(customFilter, UsernamePasswordAuthenticationFilter.class)
 		        .authorizeHttpRequests(auth -> 
 		            auth.requestMatchers("/swagger-ui/**", "/v3/api-docs/**", "/auth/refresh/**",
-		                    "/api-docs/**", "/auth/signin").permitAll()		
-			            .requestMatchers("eurofarma/admin/**").hasRole("ADMIN")
-			            .requestMatchers("eurofarma/user/**").hasRole("USER")
+		                    "/api-docs/**", "/api-eurofarma/v1/login").permitAll()		
+			            .requestMatchers("api-eurofarma/v1/admin/**").hasRole("ADMIN")
+			            .requestMatchers("api-eurofarma/v1/user/**").hasRole("USER")
 		                .requestMatchers("/users").denyAll())		
 		        .cors(cors -> {})
 		        .build();		
