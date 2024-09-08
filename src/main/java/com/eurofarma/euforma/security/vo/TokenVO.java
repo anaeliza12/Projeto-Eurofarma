@@ -1,9 +1,12 @@
 package com.eurofarma.euforma.security.vo;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.Objects;
 
-public class TokenVO {
+public class TokenVO implements Serializable {
+
+	private static final long serialVersionUID = 1L;
 
 	private String email;
 	private Boolean authenticated;
@@ -76,7 +79,7 @@ public class TokenVO {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(accessToken, authenticated, created, email, expiration, refreshToken);
+		return Objects.hash(accessToken, authenticated, created, expiration, refreshToken, email);
 	}
 
 	@Override
@@ -89,8 +92,8 @@ public class TokenVO {
 			return false;
 		TokenVO other = (TokenVO) obj;
 		return Objects.equals(accessToken, other.accessToken) && Objects.equals(authenticated, other.authenticated)
-				&& Objects.equals(created, other.created) && Objects.equals(email, other.email)
-				&& Objects.equals(expiration, other.expiration) && Objects.equals(refreshToken, other.refreshToken);
+				&& Objects.equals(created, other.created) && Objects.equals(expiration, other.expiration)
+				&& Objects.equals(refreshToken, other.refreshToken) && Objects.equals(email, other.email);
 	}
 
 }

@@ -47,4 +47,5 @@ public class AccountCredencialsVO implements Serializable {
 		AccountCredencialsVO other = (AccountCredencialsVO) obj;
 		return Objects.equals(password, other.password) && Objects.equals(email, other.email);
 	}
+
 }
