@@ -7,25 +7,25 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.filter.GenericFilterBean;
 
-
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.ServletRequest;
 import jakarta.servlet.ServletResponse;
 import jakarta.servlet.http.HttpServletRequest;
 
-public class TokenFilter extends GenericFilterBean  {
-	
+public class JwtTokenFilter extends GenericFilterBean {
+
 	@Autowired
 	private TokenProvider tokenProvider;
 
-	public TokenFilter(TokenProvider tokenProvider) {
+	public JwtTokenFilter(TokenProvider tokenProvider) {
 		this.tokenProvider = tokenProvider;
 	}
 
 	@Override
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
 			throws IOException, ServletException {
+	
 		String token = tokenProvider.resolveToken((HttpServletRequest) request);
 		if (token != null && tokenProvider.validateToken(token)) {
 			Authentication auth = tokenProvider.getAuthentication(token);
@@ -33,7 +33,8 @@ public class TokenFilter extends GenericFilterBean  {
 				SecurityContextHolder.getContext().setAuthentication(auth);
 			}
 		}
-		chain.doFilter(request, response);		
+		chain.doFilter(request, response);
 	}
 
 }
+
