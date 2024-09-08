@@ -1,9 +1,11 @@
 package com.eurofarma.euforma.entities;
 
+import java.io.Serializable;
 import java.util.Objects;
 
 import org.springframework.security.core.GrantedAuthority;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -12,7 +14,7 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "permissoes")
-public class Permission implements GrantedAuthority {
+public class Permission implements GrantedAuthority, Serializable {
 
 	private static final long serialVersionUID = 1L;
 
@@ -20,19 +22,15 @@ public class Permission implements GrantedAuthority {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
+	@Column(nullable = false, length = 180)
 	private String description;
-
-	@Override
-	public String getAuthority() {
-		return this.description;
-	}
 
 	public Permission() {
 	}
 
-	public Permission(Long id, String description) {
-		this.id = id;
-		this.description = description;
+	@Override
+	public String getAuthority() {
+		return this.description;
 	}
 
 	public Long getId() {
@@ -67,4 +65,5 @@ public class Permission implements GrantedAuthority {
 		Permission other = (Permission) obj;
 		return Objects.equals(id, other.id);
 	}
+
 }

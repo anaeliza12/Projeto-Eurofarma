@@ -1,5 +1,6 @@
 package com.eurofarma.euforma.entities;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -21,7 +22,7 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "usuarios")
-public class User implements UserDetails {
+public class User implements UserDetails, Serializable {
 
 	private static final long serialVersionUID = 1L;
 
@@ -29,7 +30,7 @@ public class User implements UserDetails {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@Column(nullable = false, length = 180)
+	@Column(name = "email", unique = true, length = 180)
 	private String email;
 
 	@Column(nullable = false, length = 180)
@@ -54,16 +55,12 @@ public class User implements UserDetails {
 	public User() {
 	}
 
-	public User(Long id, String firstName, String lastName, String username, String email, String password,
-			Boolean accountNonExpired, Boolean accountNonLocked, Boolean credentialsNonExpired, Boolean enabled) {
-		super();
-		this.id = id;
-		this.email = email;
-		this.password = password;
-		this.accountNonExpired = accountNonExpired;
-		this.accountNonLocked = accountNonLocked;
-		this.credentialsNonExpired = credentialsNonExpired;
-		this.enabled = enabled;
+	public List<String> getRoles() {
+		List<String> roles = new ArrayList<>();
+		for (Permission permission : permissions) {
+			roles.add(permission.getDescription());
+		}
+		return roles;
 	}
 
 	@Override
@@ -81,12 +78,24 @@ public class User implements UserDetails {
 		return this.email;
 	}
 
-	public List<String> getRoles() {
-		List<String> roles = new ArrayList<>();
-		for (Permission p : permissions) {
-			roles.add(p.getDescription());
-		}
-		return roles;
+	@Override
+	public boolean isAccountNonExpired() {
+		return this.accountNonExpired;
+	}
+
+	@Override
+	public boolean isAccountNonLocked() {
+		return this.accountNonLocked;
+	}
+
+	@Override
+	public boolean isCredentialsNonExpired() {
+		return this.credentialsNonExpired;
+	}
+
+	@Override
+	public boolean isEnabled() {
+		return this.enabled;
 	}
 
 	public Long getId() {
@@ -97,16 +106,12 @@ public class User implements UserDetails {
 		this.id = id;
 	}
 
-	public void setPassword(String password) {
-		this.password = password;
-	}
-	
-	public String getEmail() {
+	public String getUserName() {
 		return email;
 	}
 
-	public void setEmail(String email) {
-		this.email = email;
+	public void setUserName(String userName) {
+		this.email = userName;
 	}
 
 	public Boolean getAccountNonExpired() {
@@ -139,6 +144,18 @@ public class User implements UserDetails {
 
 	public void setEnabled(Boolean enabled) {
 		this.enabled = enabled;
+	}
+
+	public List<Permission> getPermissions() {
+		return permissions;
+	}
+
+	public void setPermissions(List<Permission> permissions) {
+		this.permissions = permissions;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
 	}
 
 	@Override
