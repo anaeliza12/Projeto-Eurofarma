@@ -8,8 +8,8 @@ import org.springframework.stereotype.Repository;
 import com.eurofarma.euforma.entities.User;
 
 @Repository
-public interface UserRepository extends JpaRepository<User, Long> {
+public interface UserRepository extends JpaRepository<User, Long>{
 
 	@Query("SELECT u FROM User u WHERE email =:email")
-	User findByEmail(@Param("email") String email);
+	User findByUsername(@Param("email") String email);
 }
