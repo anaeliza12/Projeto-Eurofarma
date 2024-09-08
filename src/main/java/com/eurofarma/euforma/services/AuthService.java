@@ -34,19 +34,35 @@ public class AuthService {
 
 			authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(email, password));
 
-			var user = repository.findByEmail(email);
+			var user = repository.findByUsername(email);
 
 			var tokenResponse = new TokenVO();
 
 			if (user != null) {
-				tokenResponse = tokenProvider.createAccessToken(user);
+				tokenResponse = tokenProvider.createAccessToken(email, user.getRoles());
+
 			} else {
-				throw new UsernameNotFoundException("Username " + email + " not found!");
+				throw new UsernameNotFoundException("Email " + email + " not found!");
 			}
 			return ResponseEntity.ok(tokenResponse);
 
 		} catch (Exception e) {
-			throw new BadCredentialsException("Invalid username/password supplied!");
+			throw new BadCredentialsException("Invalid email/password supplied!");
 		}
+	}
+	
+	@SuppressWarnings("rawtypes")
+	public ResponseEntity refreshToken(String email, String refreshToken) {
+		var user = repository.findByUsername(email);
+		
+		var tokenResponse = new TokenVO();	
+		if (user != null) {
+			tokenResponse = tokenProvider.refreshToken(refreshToken);
+			
+		} else {
+			throw new UsernameNotFoundException("Email " + email + " not found!");
+		}
+		return ResponseEntity.ok(tokenResponse);
+
 	}
 }
