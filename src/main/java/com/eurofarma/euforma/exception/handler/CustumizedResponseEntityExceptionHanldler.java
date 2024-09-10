@@ -15,7 +15,7 @@ import com.eurofarma.euforma.exception.InvalidJwtAuthenticationException;
 
 @ControllerAdvice
 @RestController
-public class CustumizedRespondeEntityExceptionHanldler extends ResponseEntityExceptionHandler {
+public class CustumizedResponseEntityExceptionHanldler extends ResponseEntityExceptionHandler {
 
 	@ExceptionHandler(InvalidJwtAuthenticationException.class)
 	public final ResponseEntity<ExceptionResponse> handleInvalidJwtAuthenticationException(Exception ex,

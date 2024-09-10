@@ -1,7 +1,5 @@
 package com.eurofarma.euforma.controller;
 
-import java.util.logging.Logger;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,7 +13,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.eurofarma.euforma.security.vo.AccountCredencialsVO;
 import com.eurofarma.euforma.services.AuthService;
-import com.eurofarma.euforma.services.UserService;
 
 @RestController
 @RequestMapping("/api-eurofarma/auth")

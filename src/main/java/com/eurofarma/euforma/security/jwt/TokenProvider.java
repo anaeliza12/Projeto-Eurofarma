@@ -17,6 +17,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.JWTVerifier;
 import com.auth0.jwt.algorithms.Algorithm;
+import com.auth0.jwt.exceptions.IncorrectClaimException;
 import com.auth0.jwt.interfaces.DecodedJWT;
 import com.eurofarma.euforma.entities.User;
 import com.eurofarma.euforma.exception.InvalidJwtAuthenticationException;
@@ -105,7 +106,12 @@ public class TokenProvider {
 	private DecodedJWT decodedToken(String token) {		
 		Algorithm alg = Algorithm.HMAC256(secretKey.getBytes());
 		JWTVerifier verifier = JWT.require(alg).build();
-		DecodedJWT decodedToken = verifier.verify(token);
+		DecodedJWT decodedToken = null;
+		try {
+			decodedToken = verifier.verify(token);
+		}catch (IncorrectClaimException e) {
+			throw new InvalidJwtAuthenticationException("oi");
+		}
 		return decodedToken;
 	}
 	
