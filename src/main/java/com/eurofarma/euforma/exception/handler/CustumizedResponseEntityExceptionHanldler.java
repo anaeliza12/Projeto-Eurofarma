@@ -12,6 +12,8 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 
 import com.eurofarma.euforma.exception.ExceptionResponse;
 import com.eurofarma.euforma.exception.InvalidJwtAuthenticationException;
+import com.eurofarma.euforma.exception.ResourceNotFoundException;
+
 
 @ControllerAdvice
 @RestController
@@ -26,4 +28,14 @@ public class CustumizedResponseEntityExceptionHanldler extends ResponseEntityExc
 
 		return new ResponseEntity<>(exceptionResponse, HttpStatus.FORBIDDEN);
 	}
+	
+	@ExceptionHandler(ResourceNotFoundException.class)
+	public final ResponseEntity<ExceptionResponse> handleBadRequestExceptions(Exception ex, WebRequest request) {
+
+		ExceptionResponse exceptionResponse = new ExceptionResponse(new Date(), ex.getMessage(),
+				request.getDescription(false));
+
+		return new ResponseEntity<>(exceptionResponse, HttpStatus.BAD_REQUEST);
+	}
+
 }
