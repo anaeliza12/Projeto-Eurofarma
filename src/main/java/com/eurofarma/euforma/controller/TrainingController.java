@@ -6,10 +6,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.eurofarma.euforma.entities.UserTraining;
 import com.eurofarma.euforma.services.TrainingService;
 
 @RestController
-@RequestMapping(name = "/api-eurofarma/training")
+@RequestMapping(value = "/api-eurofarma/training")
 public class TrainingController {
 
 	@Autowired
@@ -22,5 +23,8 @@ public class TrainingController {
 		return ResponseEntity.ok(trainings);
 	}
 	
-
+	public ResponseEntity subscribe(UserTraining userTraining) {
+		var 
+		
+	}
 }

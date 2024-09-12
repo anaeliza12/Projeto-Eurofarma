@@ -1,5 +1,7 @@
 package com.eurofarma.euforma.services;
 
+import java.util.logging.Logger;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -29,6 +31,9 @@ public class AuthService {
 	@SuppressWarnings("rawtypes")
 	public ResponseEntity signIn(AccountCredencialsVO data) {
 		try {
+			 Logger logger = Logger.getLogger(ResponseEntity.class.getName());
+			logger.info("CHAMANDO  AuthService ");	
+			
 			var email = data.getEmail();
 			var password = data.getPassword();
 
