@@ -50,8 +50,8 @@ public class Training {
 	@Column(name = "local", nullable = true)
 	private String local;
 
-	@OneToMany(mappedBy = "user")
-	private List<UserTraining> users;
+	@OneToMany(mappedBy = "training")
+	private List<UserTraining> trainings;
 
 	public Training() {
 	}
