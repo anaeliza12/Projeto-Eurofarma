@@ -23,8 +23,8 @@ public class TrainingController {
 		return ResponseEntity.ok(trainings);
 	}
 	
-	public ResponseEntity subscribe(UserTraining userTraining) {
-		var 
-		
-	}
+//	public ResponseEntity subscribe(UserTraining userTraining) {
+//		 
+//		
+//	}
 }

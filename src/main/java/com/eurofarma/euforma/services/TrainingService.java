@@ -46,31 +46,31 @@ public class TrainingService {
 		}
 	}
 
-	public Training update(Training training) {
-		var user = securityService.getCurrentUsername();
-		try {
-			updateData()
-		}
-
-
-	}
-
-	public User update(Long id, User user) {
-		User entity = repository.getReferenceById(id);
-		try {
-
-			updateData(user, entity);
-		} catch (EntityNotFoundException e) {
-			throw new ResourceNotFoundException(id);
-		}
-		return repository.save(entity);
-	}
-
-	private void updateData(User user, User entity) {
-		entity.setName(user.getName());
-		entity.setEmail(user.getEmail());
-		entity.setPhone(user.getPhone());
-
-	}
+//	public Training update(Training training) {
+//		var user = securityService.getCurrentUsername();
+//		try {
+//			updateData()
+//		}
+//
+//
+//	}
+//
+//	public User update(Long id, User user) {
+//		User entity = repository.getReferenceById(id);
+//		try {
+//
+//			updateData(user, entity);
+//		} catch (EntityNotFoundException e) {
+//			throw new ResourceNotFoundException(id);
+//		}
+//		return repository.save(entity);
+//	}
+//
+//	private void updateData(User user, User entity) {
+//		entity.setName(user.getName());
+//		entity.setEmail(user.getEmail());
+//		entity.setPhone(user.getPhone());
+//
+//	}
 
 }
