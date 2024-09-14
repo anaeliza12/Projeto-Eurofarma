@@ -18,6 +18,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -47,6 +48,9 @@ public class User implements UserDetails, Serializable {
 
 	@Column(nullable = false)
 	private Boolean enabled;
+	
+	@OneToMany(mappedBy = "user")
+	private List<UserTraining> users;
 
 	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(name = "usuario_permissoes", joinColumns = @JoinColumn(name = "id_user"), inverseJoinColumns = @JoinColumn(name = "id_permission"))
