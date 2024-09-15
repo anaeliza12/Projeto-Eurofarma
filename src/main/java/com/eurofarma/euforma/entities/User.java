@@ -49,7 +49,7 @@ public class User implements UserDetails, Serializable {
 	@Column(nullable = false)
 	private Boolean enabled;
 	
-	@OneToMany(mappedBy = "user")
+	@OneToMany(mappedBy = "id.user")
 	private List<UserTraining> users;
 
 	@ManyToMany(fetch = FetchType.EAGER)

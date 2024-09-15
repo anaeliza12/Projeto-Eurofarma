@@ -50,7 +50,7 @@ public class Training {
 	@Column(name = "local", nullable = true)
 	private String local;
 
-	@OneToMany(mappedBy = "training")
+	@OneToMany(mappedBy = "id.training")
 	private List<UserTraining> userTrainings;
 
 
@@ -127,8 +127,8 @@ public class Training {
 		this.description = description;
 	}
 
-	public Modality getModality(String modallity) {
-		return Modality.fromValue(modallity);
+	public Modality getModality() {
+		return Modality.valueOf(modality);
 	}
 
 	public void setModality(Modality modality) {

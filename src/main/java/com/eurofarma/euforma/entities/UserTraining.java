@@ -42,8 +42,8 @@ public class UserTraining {
 		id.setTraining(training);
 	}
 
-	public Status getStatus(String value) {
-		return Status.fromValue(value);
+	public Status getStatus() {
+		return Status.valueOf(status);
 	}
 
 	public void setStatus(Status status) {
