@@ -2,66 +2,44 @@ package com.eurofarma.euforma.entities;
 
 import java.util.Objects;
 
+import com.eurofarma.euforma.entities.pk.UserTrainingPK;
 import com.eurofarma.eurofarma.enums.Status;
 
+import jakarta.persistence.EmbeddedId;
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "usuario_treinamento")
 public class UserTraining {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
-
-	@ManyToOne
-	@JoinColumn(name = "usuario_id")
-	private User user;
-
-	@ManyToOne
-	@JoinColumn(name = "treinamento_id")
-	private Training training;
-
+	@EmbeddedId
+	private UserTrainingPK id = new UserTrainingPK();
 	private String status;
 
 	public UserTraining() {
 	}
 
-	public UserTraining(Long id, User user, Training training, Status status) {
-		this.id = id;
-		this.user = user;
-		this.training = training;
+	public UserTraining(User user, Training training, Status status) {
+		id.setUser(user);
+		id.setTraining(training);
 		setStatus(status);
 	}
 
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
 	public User getUser() {
-		return user;
+		return id.getUser();
 	}
 
 	public void setUser(User user) {
-		this.user = user;
+		id.setUser(user);
 	}
 
 	public Training getTraining() {
-		return training;
+		return id.getTraining();
 	}
 
 	public void setTraining(Training training) {
-		this.training = training;
+		id.setTraining(training);
 	}
 
 	public Status getStatus(String value) {
@@ -69,8 +47,8 @@ public class UserTraining {
 	}
 
 	public void setStatus(Status status) {
-		if(this.status != null) {
-			this.status = status.getValue();			
+		if (this.status != null) {
+			this.status = status.getValue();
 		}
 	}
 

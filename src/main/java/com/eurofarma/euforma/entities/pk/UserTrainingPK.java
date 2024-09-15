@@ -15,7 +15,7 @@ public class UserTrainingPK {
 	@ManyToOne
 	@JoinColumn(name = "user_id")
 	private User user;
-
+	
 	@ManyToOne
 	@JoinColumn(name = "training_id")
 	private Training training;

@@ -51,7 +51,9 @@ public class Training {
 	private String local;
 
 	@OneToMany(mappedBy = "training")
-	private List<UserTraining> trainings;
+	private List<UserTraining> userTrainings;
+
+
 
 	public Training() {
 	}
@@ -130,9 +132,9 @@ public class Training {
 	}
 
 	public void setModality(Modality modality) {
-		if(this.modality != null) {
-			this.modality = modality.getName();			
-		}		
+		if (this.modality != null) {
+			this.modality = modality.getName();
+		}
 	}
 
 	public String getLocal() {
@@ -141,6 +143,10 @@ public class Training {
 
 	public void setLocal(String local) {
 		this.local = local;
+	}
+
+	public List<UserTraining> getUserTraining() {
+		return userTrainings;
 	}
 
 	@Override

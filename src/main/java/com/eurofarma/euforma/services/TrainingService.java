@@ -11,8 +11,10 @@ import org.springframework.stereotype.Service;
 
 import com.eurofarma.euforma.entities.Training;
 import com.eurofarma.euforma.entities.User;
+import com.eurofarma.euforma.entities.UserTraining;
 import com.eurofarma.euforma.exception.ResourceNotFoundException;
 import com.eurofarma.euforma.repositories.TrainingRepository;
+import com.eurofarma.eurofarma.enums.Status;
 
 import jakarta.persistence.EntityNotFoundException;
 
@@ -46,15 +48,15 @@ public class TrainingService {
 		}
 	}
 
-//	public Training update(Training training) {
-//		var user = securityService.getCurrentUsername();
-//		try {
-//			updateData()
-//		}
-//
-//
-//	}
-//
+	public Training subscribe(Training training) {
+		var user = securityService.getCurrentUsername();
+		var userTraining = new UserTraining((User) user, training, Status.PENDENTE);
+		training.getUserTraining().add(userTraining);
+		
+		return 
+		
+	}
+
 //	public User update(Long id, User user) {
 //		User entity = repository.getReferenceById(id);
 //		try {
