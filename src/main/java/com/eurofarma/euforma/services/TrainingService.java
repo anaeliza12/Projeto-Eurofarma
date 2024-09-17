@@ -1,10 +1,12 @@
 package com.eurofarma.euforma.services;
 
+import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 import com.eurofarma.euforma.entities.Training;
@@ -48,23 +50,26 @@ public class TrainingService {
 
 	public Training subscribe(Training training) {
 		var user = securityService.getCurrentUsername();
-		var userTraining = new UserTraining((User) user, training, Status.PENDENTE);
-		
+
 		findById(training.getId());
-		training.getUserTraining().add(userTraining);
-		
-		return update(training);
-		
+
+		return updateUserTraining(training, user);
 	}
 
-	public Training update(Training training) {
+	public Training updateUserTraining(Training training, UserDetails user) {
+		
 		Training entity = repository.getReferenceById(training.getId());
-		try {
-			updateData(training, entity);
-		} catch (EntityNotFoundException e) {
-			throw new ResourceNotFoundException("training: " + training.getId() + " not found");
-		}
-		return repository.save(entity);
+		
+		var userTraining = new UserTraining((User) user, training, Status.PENDENTE);
+		
+		entity.getUserTraining().add(userTraining);
+		
+		var teste = repository.save(entity);
+		
+		if(teste == null)
+			return entity;
+		
+		return null;
 	}
 
 	private void updateData(Training training, Training entity) {
@@ -74,7 +79,7 @@ public class TrainingService {
 		entity.setDepartment(training.getDepartment());
 		entity.setDescription(training.getDescription());
 		entity.setLocal(training.getLocal());
-		entity.setModality(training.getModality());	
+		entity.setModality(training.getModality());
 
 	}
 }

@@ -24,7 +24,7 @@ import jakarta.persistence.Table;
 @Entity
 @Table(name = "usuarios")
 public class User implements UserDetails, Serializable {
-
+	
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -34,7 +34,7 @@ public class User implements UserDetails, Serializable {
 	@Column(name = "email", unique = true, length = 180)
 	private String email;
 
-	@Column(nullable = false, length = 180)
+	@Column(name = "senha", nullable = false, length = 180)
 	private String password;
 
 	@Column(name = "account_non_expired", nullable = false)
@@ -48,13 +48,13 @@ public class User implements UserDetails, Serializable {
 
 	@Column(nullable = false)
 	private Boolean enabled;
-	
-	@OneToMany(mappedBy = "id.user")
-	private List<UserTraining> users;
 
 	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(name = "usuario_permissoes", joinColumns = @JoinColumn(name = "id_user"), inverseJoinColumns = @JoinColumn(name = "id_permission"))
 	private List<Permission> permissions;
+	
+	@OneToMany(mappedBy = "id.user", fetch = FetchType.EAGER)
+	private List<UserTraining> userTrainings = new ArrayList<>();
 
 	public User() {
 	}
@@ -160,6 +160,10 @@ public class User implements UserDetails, Serializable {
 
 	public void setPassword(String password) {
 		this.password = password;
+	}
+	
+	public List<UserTraining> getUserTraining() {
+		return userTrainings;
 	}
 
 	@Override

@@ -2,6 +2,7 @@ package com.eurofarma.euforma.entities;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -9,6 +10,7 @@ import com.eurofarma.eurofarma.enums.Modality;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -50,10 +52,8 @@ public class Training {
 	@Column(name = "local", nullable = true)
 	private String local;
 
-	@OneToMany(mappedBy = "id.training")
-	private List<UserTraining> userTrainings;
-
-
+	@OneToMany(mappedBy = "id.training", fetch = FetchType.EAGER)
+	private List<UserTraining> userTrainings = new ArrayList<>();
 
 	public Training() {
 	}
@@ -132,9 +132,9 @@ public class Training {
 	}
 
 	public void setModality(Modality modality) {
-		if (this.modality != null) {
-			this.modality = modality.getName();
-		}
+		if(this.modality != null) {
+			this.modality = modality.getName();			
+		}		
 	}
 
 	public String getLocal() {
@@ -144,7 +144,7 @@ public class Training {
 	public void setLocal(String local) {
 		this.local = local;
 	}
-
+	
 	public List<UserTraining> getUserTraining() {
 		return userTrainings;
 	}

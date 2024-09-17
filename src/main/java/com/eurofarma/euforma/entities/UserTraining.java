@@ -7,6 +7,11 @@ import com.eurofarma.eurofarma.enums.Status;
 
 import jakarta.persistence.EmbeddedId;
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -21,8 +26,8 @@ public class UserTraining {
 	}
 
 	public UserTraining(User user, Training training, Status status) {
-		id.setUser(user);
 		id.setTraining(training);
+		id.setUser(user);
 		setStatus(status);
 	}
 
@@ -42,14 +47,12 @@ public class UserTraining {
 		id.setTraining(training);
 	}
 
-	public Status getStatus() {
-		return Status.valueOf(status);
+	public Status getStatus(String value) {
+		return Status.fromValue(value);
 	}
 
 	public void setStatus(Status status) {
-		if (this.status != null) {
-			this.status = status.getValue();
-		}
+		this.status = status.getValue();
 	}
 
 	@Override

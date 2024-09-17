@@ -13,11 +13,11 @@ import jakarta.persistence.ManyToOne;
 public class UserTrainingPK {
 
 	@ManyToOne
-	@JoinColumn(name = "user_id")
+	@JoinColumn(name = "usuario_id")
 	private User user;
 	
 	@ManyToOne
-	@JoinColumn(name = "training_id")
+	@JoinColumn(name = "treinamento_id")
 	private Training training;
 
 	public User getUser() {

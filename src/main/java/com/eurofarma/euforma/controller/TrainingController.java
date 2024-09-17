@@ -3,9 +3,12 @@ package com.eurofarma.euforma.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.eurofarma.euforma.entities.Training;
 import com.eurofarma.euforma.entities.UserTraining;
 import com.eurofarma.euforma.services.TrainingService;
 
@@ -23,8 +26,9 @@ public class TrainingController {
 		return ResponseEntity.ok(trainings);
 	}
 	
-//	public ResponseEntity subscribe(UserTraining userTraining) {
-//		 
-//		
-//	}
+	@PostMapping(value = "/v1/subscribe")
+	public ResponseEntity subscribe(@RequestBody Training training) {
+		var subscribe =  service.subscribe(training);
+		return ResponseEntity.ok().body(subscribe);
+	}
 }
