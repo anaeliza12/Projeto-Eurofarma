@@ -51,16 +51,14 @@ public class TrainingService {
 	public Training subscribe(Training training) {
 		var user = securityService.getCurrentUsername();
 
-		findById(training.getId());
+		Training entity = repository.getReferenceById(training.getId());
+		
+		var userTraining = new UserTraining((User) user, training, Status.PENDENTE);
 
 		return updateUserTraining(training, user);
 	}
 
-	public Training updateUserTraining(Training training, UserDetails user) {
-		
-		Training entity = repository.getReferenceById(training.getId());
-		
-		var userTraining = new UserTraining((User) user, training, Status.PENDENTE);
+	public Training updateUserTraining(UserTraining userTraining) {
 		
 		entity.getUserTraining().add(userTraining);
 		
