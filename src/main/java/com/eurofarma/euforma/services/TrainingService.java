@@ -26,6 +26,9 @@ public class TrainingService {
 
 	@Autowired
 	private SecurityService securityService;
+	
+	@Autowired
+	private UserTrainingService userTrainingService;
 
 	public List<Training> findAll() {
 		return repository.findAll();
@@ -54,18 +57,20 @@ public class TrainingService {
 		Training entity = repository.getReferenceById(training.getId());
 		
 		var userTraining = new UserTraining((User) user, training, Status.PENDENTE);
+		
+		userTrainingService.create(userTraining);
 
-		return updateUserTraining(training, user);
+		return updateUserTraining(userTraining, training);
 	}
 
-	public Training updateUserTraining(UserTraining userTraining) {
+	public Training updateUserTraining(UserTraining userTraining, Training training) {
 		
-		entity.getUserTraining().add(userTraining);
+		training.getUserTraining().add(userTraining);
 		
-		var teste = repository.save(entity);
+		var teste = repository.save(training);
 		
 		if(teste == null)
-			return entity;
+			return training;
 		
 		return null;
 	}
