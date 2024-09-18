@@ -81,15 +81,16 @@ public class TrainingService {
 			throw new ResourceNotFoundException("Training: " + newTraining.getId() + " not found");
 		}
 		return repository.save(entity);
-
 	}
 
 	private void updateData(Training newTraining, Training entity) {
 		entity.setName(newTraining.getName());
-		entity.setTime(newTraining.getTime());
-		entity.setDate(newTraining.getDate());
 		entity.setDepartment(newTraining.getDepartment());
+		entity.setDuration(newTraining.getDuration());
+		entity.setDate(newTraining.getDate());
+		entity.setTime(newTraining.getTime());
 		entity.setDescription(newTraining.getDescription());
+		entity.setModality(newTraining.getModality());
 		entity.setLocal(newTraining.getLocal());
 	}
 }
