@@ -4,6 +4,7 @@ import java.util.Objects;
 
 import com.eurofarma.euforma.entities.Training;
 import com.eurofarma.euforma.entities.User;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.Embeddable;
 import jakarta.persistence.JoinColumn;

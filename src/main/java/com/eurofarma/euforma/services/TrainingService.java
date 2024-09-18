@@ -26,7 +26,7 @@ public class TrainingService {
 
 	@Autowired
 	private SecurityService securityService;
-	
+
 	@Autowired
 	private UserTrainingService userTrainingService;
 
@@ -53,26 +53,28 @@ public class TrainingService {
 
 	public Training subscribe(Training training) {
 		var user = securityService.getCurrentUsername();
-
+		var statusPadrao = "Pendente";
 		Training entity = repository.getReferenceById(training.getId());
-		
-		var userTraining = new UserTraining((User) user, training, Status.PENDENTE);
-		
+
+		for (UserTraining u : entity.getUserTraining()) {
+			if (u.getTraining().getId() == training.getId()) {
+				userTrainingService.delete(u);
+				return null;
+			}
+		}
+
+		var userTraining = new UserTraining((User) user, training, statusPadrao);
+
 		userTrainingService.create(userTraining);
 
-		return updateUserTraining(userTraining, training);
+		return updateUserTraining(userTraining, entity);
 	}
 
 	public Training updateUserTraining(UserTraining userTraining, Training training) {
-		
+
 		training.getUserTraining().add(userTraining);
-		
-		var teste = repository.save(training);
-		
-		if(teste == null)
-			return training;
-		
-		return null;
+
+		return repository.save(training);
 	}
 
 	private void updateData(Training training, Training entity) {
@@ -82,7 +84,5 @@ public class TrainingService {
 		entity.setDepartment(training.getDepartment());
 		entity.setDescription(training.getDescription());
 		entity.setLocal(training.getLocal());
-		entity.setModality(training.getModality());
-
 	}
 }

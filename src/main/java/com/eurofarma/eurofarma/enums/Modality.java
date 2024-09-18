@@ -5,6 +5,7 @@ public enum Modality {
 	PRESENCIAL("Presencial"),
 	ONLINE("On-line");
 
+
 	private final String value;
 
 	Modality(String value) {
@@ -22,17 +23,5 @@ public enum Modality {
 			}
 		}
 		throw new IllegalArgumentException("Valor inválido: " + value);
-	}
-
-	public String getName() {
-		return this.name();
-	}
-
-	public static Modality fromName(String name) {
-		try {
-			return Modality.valueOf(name);
-		} catch (IllegalArgumentException e) {
-			throw new IllegalArgumentException("Nome inválido: " + name);
-		}
 	}
 }

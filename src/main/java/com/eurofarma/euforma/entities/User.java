@@ -9,6 +9,8 @@ import java.util.Objects;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -53,7 +55,7 @@ public class User implements UserDetails, Serializable {
 	@JoinTable(name = "usuario_permissoes", joinColumns = @JoinColumn(name = "id_user"), inverseJoinColumns = @JoinColumn(name = "id_permission"))
 	private List<Permission> permissions;
 	
-	@OneToMany(mappedBy = "id.user", fetch = FetchType.EAGER)
+	@OneToMany(mappedBy = "id.user", fetch = FetchType.LAZY)
 	private List<UserTraining> userTrainings = new ArrayList<>();
 
 	public User() {
@@ -68,6 +70,7 @@ public class User implements UserDetails, Serializable {
 	}
 
 	@Override
+	@JsonIgnore
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 		return this.permissions;
 	}
@@ -78,6 +81,7 @@ public class User implements UserDetails, Serializable {
 	}
 
 	@Override
+	@JsonIgnore
 	public String getUsername() {
 		return this.email;
 	}
@@ -110,7 +114,7 @@ public class User implements UserDetails, Serializable {
 		this.id = id;
 	}
 
-	public String getUserName() {
+	public String getEmail() {
 		return email;
 	}
 
@@ -162,6 +166,7 @@ public class User implements UserDetails, Serializable {
 		this.password = password;
 	}
 	
+	@JsonIgnore
 	public List<UserTraining> getUserTraining() {
 		return userTrainings;
 	}

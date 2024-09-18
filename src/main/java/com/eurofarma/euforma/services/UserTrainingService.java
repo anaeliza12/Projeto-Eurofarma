@@ -15,5 +15,9 @@ public class UserTrainingService {
 	public UserTraining create(UserTraining userTraining) {
 		return repository.save(userTraining);
 	}
+	
+	public void delete(UserTraining userTraining) {
+		repository.delete(userTraining);
+	}
 
 }

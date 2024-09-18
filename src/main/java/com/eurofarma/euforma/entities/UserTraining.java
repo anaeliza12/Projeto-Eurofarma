@@ -4,14 +4,14 @@ import java.util.Objects;
 
 import com.eurofarma.euforma.entities.pk.UserTrainingPK;
 import com.eurofarma.eurofarma.enums.Status;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.EmbeddedId;
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.Table;
 
 @Entity
@@ -20,17 +20,20 @@ public class UserTraining {
 
 	@EmbeddedId
 	private UserTrainingPK id = new UserTrainingPK();
-	private String status;
+	
+	@Column(name = "status", nullable = false)
+	@Enumerated(EnumType.STRING)
+	private Status status;
 
 	public UserTraining() {
 	}
 
-	public UserTraining(User user, Training training, Status status) {
+	public UserTraining(User user, Training training, String status) {
 		id.setTraining(training);
 		id.setUser(user);
 		setStatus(status);
 	}
-
+	
 	public User getUser() {
 		return id.getUser();
 	}
@@ -38,7 +41,8 @@ public class UserTraining {
 	public void setUser(User user) {
 		id.setUser(user);
 	}
-
+	
+	@JsonIgnore
 	public Training getTraining() {
 		return id.getTraining();
 	}
@@ -47,12 +51,12 @@ public class UserTraining {
 		id.setTraining(training);
 	}
 
-	public Status getStatus(String value) {
-		return Status.fromValue(value);
+	public String getStatus() {
+		return status.getValue();
 	}
 
-	public void setStatus(Status status) {
-		this.status = status.getValue();
+	public void setStatus(String status) {
+		this.status = Status.fromValue(status);
 	}
 
 	@Override

@@ -29,6 +29,11 @@ public class TrainingController {
 	@PostMapping(value = "/v1/subscribe")
 	public ResponseEntity subscribe(@RequestBody Training training) {
 		var subscribe =  service.subscribe(training);
+		if(subscribe == null) {
+			 return ResponseEntity.ok().body("Inscrição cancelada com sucesso");
+		}
+
 		return ResponseEntity.ok().body(subscribe);
 	}
+	
 }

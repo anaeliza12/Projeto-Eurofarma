@@ -10,6 +10,8 @@ import com.eurofarma.eurofarma.enums.Modality;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -47,7 +49,8 @@ public class Training {
 	private String description;
 
 	@Column(name = "modalidade", nullable = false)
-	private String modality;
+	@Enumerated(EnumType.STRING)
+	private Modality modality;
 
 	@Column(name = "local", nullable = true)
 	private String local;
@@ -59,7 +62,7 @@ public class Training {
 	}
 
 	public Training(Long id, String name, Departament department, String duration, LocalDate date, LocalTime time,
-			String description, Modality modality, String local) {
+			String description, String modality, String local) {
 		this.id = id;
 		this.name = name;
 		this.department = department;
@@ -127,14 +130,12 @@ public class Training {
 		this.description = description;
 	}
 
-	public Modality getModality() {
-		return Modality.valueOf(modality);
+	public String getModality() {
+		return modality.getValue();
 	}
 
-	public void setModality(Modality modality) {
-		if(this.modality != null) {
-			this.modality = modality.getName();			
-		}		
+	public void setModality(String modality) {
+		  this.modality = Modality.fromValue(modality);
 	}
 
 	public String getLocal() {
@@ -144,7 +145,7 @@ public class Training {
 	public void setLocal(String local) {
 		this.local = local;
 	}
-	
+
 	public List<UserTraining> getUserTraining() {
 		return userTrainings;
 	}
