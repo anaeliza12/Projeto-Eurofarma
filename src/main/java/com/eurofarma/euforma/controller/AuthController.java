@@ -14,14 +14,19 @@ import org.springframework.web.bind.annotation.RestController;
 import com.eurofarma.euforma.security.vo.AccountCredencialsVO;
 import com.eurofarma.euforma.services.AuthService;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
+
 @RestController
 @RequestMapping("/api-eurofarma/auth")
+@Tag(name = "Authentication Endpoint")
 public class AuthController {
 
 	@Autowired
 	AuthService authService;
 
 	@SuppressWarnings("rawtypes")
+	@Operation(summary = "Authenticates an user and returns a token")
 	@PostMapping(value = "/v1/login")
 	public ResponseEntity signIn(@RequestBody AccountCredencialsVO data) {
 		if (checkIfParamIsNotNull(data))
@@ -33,6 +38,7 @@ public class AuthController {
 	}
 
 	@SuppressWarnings("rawtypes")
+	@Operation(summary = "Refresh token for authenticated user and returns a token")
 	@PutMapping(value = "v1/refresh/{email}")
 	public ResponseEntity refreshToken(@PathVariable String email,
 			@RequestHeader("Authorization") String refreshToken) {

@@ -10,13 +10,13 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
+import com.auth0.jwt.exceptions.TokenExpiredException;
 import com.eurofarma.euforma.exception.ExceptionResponse;
 import com.eurofarma.euforma.exception.InvalidJwtAuthenticationException;
 import com.eurofarma.euforma.exception.ResourceNotFoundException;
 
 
 @ControllerAdvice
-@RestController
 public class CustumizedResponseEntityExceptionHanldler extends ResponseEntityExceptionHandler {
 
 	@ExceptionHandler(InvalidJwtAuthenticationException.class)
@@ -36,6 +36,15 @@ public class CustumizedResponseEntityExceptionHanldler extends ResponseEntityExc
 				request.getDescription(false));
 
 		return new ResponseEntity<>(exceptionResponse, HttpStatus.BAD_REQUEST);
+	}
+	
+	@ExceptionHandler(TokenExpiredException.class)
+	public final ResponseEntity<ExceptionResponse> handleTokenExpiredException(Exception ex, WebRequest request) {
+		
+		ExceptionResponse exceptionResponse = new ExceptionResponse(new Date(), ex.getMessage(),
+				request.getDescription(false));
+		
+		return new ResponseEntity<>(exceptionResponse, HttpStatus.UNAUTHORIZED);
 	}
 
 }

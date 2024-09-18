@@ -18,6 +18,7 @@ import com.auth0.jwt.JWT;
 import com.auth0.jwt.JWTVerifier;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.exceptions.IncorrectClaimException;
+import com.auth0.jwt.exceptions.TokenExpiredException;
 import com.auth0.jwt.interfaces.DecodedJWT;
 import com.eurofarma.euforma.entities.User;
 import com.eurofarma.euforma.exception.InvalidJwtAuthenticationException;
@@ -32,8 +33,8 @@ public class TokenProvider {
 	@Value("${security.jwt.token.secret-key:secret}")
 	private String secretKey = "secret";
 
-	@Value("${security.jwt.token.expire-length:3600000}")
-	private long validityInMilliSeconds = 3600000;
+	@Value("${security.jwt.token.expire-length:60000}")
+	private long validityInMilliSeconds = 60000;
 
 	@Autowired
 	private UserDetailsService userDetailsService;
@@ -109,7 +110,7 @@ public class TokenProvider {
 		DecodedJWT decodedToken = null;
 		try {
 			decodedToken = verifier.verify(token);
-		}catch (IncorrectClaimException e) {
+		}catch (TokenExpiredException e) {
 			throw new InvalidJwtAuthenticationException("oi");
 		}
 		return decodedToken;
