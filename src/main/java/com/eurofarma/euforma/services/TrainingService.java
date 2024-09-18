@@ -13,6 +13,8 @@ import com.eurofarma.euforma.entities.UserTraining;
 import com.eurofarma.euforma.exception.ResourceNotFoundException;
 import com.eurofarma.euforma.repositories.TrainingRepository;
 
+import jakarta.persistence.EntityNotFoundException;
+
 @Service
 public class TrainingService {
 
@@ -31,7 +33,7 @@ public class TrainingService {
 
 	public Training findById(Long id) {
 		Optional<Training> obj = repository.findById(id);
-		return obj.orElseThrow(() -> new ResourceNotFoundException("Training not found"));
+		return obj.orElseThrow(() -> new ResourceNotFoundException("Training: " + id + " not found"));
 	}
 
 	public Training insert(Training training) {
@@ -42,7 +44,7 @@ public class TrainingService {
 		try {
 			repository.deleteById(id);
 		} catch (EmptyResultDataAccessException e) {
-			throw new ResourceNotFoundException("Training not found");
+			throw new ResourceNotFoundException("Training: " + id + " not found");
 		}
 	}
 
@@ -66,18 +68,28 @@ public class TrainingService {
 	}
 
 	public Training updateUserTraining(UserTraining userTraining, Training training) {
-
 		training.getUserTraining().add(userTraining);
 
 		return repository.save(training);
 	}
 
-	private void updateData(Training training, Training entity) {
-		entity.setName(training.getName());
-		entity.setTime(training.getTime());
-		entity.setDate(training.getDate());
-		entity.setDepartment(training.getDepartment());
-		entity.setDescription(training.getDescription());
-		entity.setLocal(training.getLocal());
+	public Training update(Training newTraining) {
+		var entity = repository.getReferenceById(newTraining.getId());
+		try {
+			updateData(newTraining, entity);
+		} catch (EntityNotFoundException e) {
+			throw new ResourceNotFoundException("Training: " + newTraining.getId() + " not found");
+		}
+		return repository.save(entity);
+
+	}
+
+	private void updateData(Training newTraining, Training entity) {
+		entity.setName(newTraining.getName());
+		entity.setTime(newTraining.getTime());
+		entity.setDate(newTraining.getDate());
+		entity.setDepartment(newTraining.getDepartment());
+		entity.setDescription(newTraining.getDescription());
+		entity.setLocal(newTraining.getLocal());
 	}
 }
