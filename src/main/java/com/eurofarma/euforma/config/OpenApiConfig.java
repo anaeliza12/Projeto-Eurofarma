@@ -14,11 +14,10 @@ public class OpenApiConfig {
 	public OpenAPI customOpenApi() {
 		return new OpenAPI()
 				.info(new Info()
-				.title("RESTful API with Java and Spring Boot")
+				.title("Eurofarma Trainings")
 				.version("v1")
-				.description("This API is a simple demonstration of how applications that use java and spring boot works")
+				.description("This API offers a service for the Eurofarma Company to facilitate the management of its training")
 				.termsOfService("")
 				.license(new License().name("Apache 2.0").url("")));
 	}
-
 }
