@@ -54,9 +54,9 @@ public class TrainingController {
 		return ResponseEntity.noContent().header("Status", "User-deleted").build();
 	}
 
-	@PutMapping(value = "/v1/update")
-	public ResponseEntity update(@RequestBody Training training) {
-		var newTraining = service.update(training);
+	@PutMapping(value = "/v1/update/{id}")
+	public ResponseEntity update(@RequestBody Training training, @PathVariable Long id) {
+		var newTraining = service.update(training, id);
 		return ResponseEntity.ok(newTraining);
 	}
 }

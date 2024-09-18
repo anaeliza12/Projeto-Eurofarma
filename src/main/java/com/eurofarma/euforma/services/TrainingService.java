@@ -73,12 +73,12 @@ public class TrainingService {
 		return repository.save(training);
 	}
 
-	public Training update(Training newTraining) {
-		var entity = repository.getReferenceById(newTraining.getId());
+	public Training update(Training newTraining, Long id) {
+		var entity = repository.getReferenceById(id);
 		try {
 			updateData(newTraining, entity);
 		} catch (EntityNotFoundException e) {
-			throw new ResourceNotFoundException("Training: " + newTraining.getId() + " not found");
+			throw new ResourceNotFoundException("Training: " + id + " not found");
 		}
 		return repository.save(entity);
 	}
