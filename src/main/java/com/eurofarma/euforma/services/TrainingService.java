@@ -38,9 +38,9 @@ public class TrainingService {
 		return repository.save(training);
 	}
 
-	public void delete(Long training) {
+	public void delete(Long id) {
 		try {
-			repository.deleteById(training);
+			repository.deleteById(id);
 		} catch (EmptyResultDataAccessException e) {
 			throw new ResourceNotFoundException("Training not found");
 		}

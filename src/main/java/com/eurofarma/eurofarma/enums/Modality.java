@@ -18,7 +18,7 @@ public enum Modality {
 
 	public static Modality fromValue(String value) {
 		for (Modality modality : Modality.values()) {
-			if (modality.getValue() == value) {
+			if (modality.getValue().equals(value)) {
 				return modality;
 			}
 		}
