@@ -15,9 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.eurofarma.euforma.entities.Training;
-import com.eurofarma.euforma.entities.UserTraining;
 import com.eurofarma.euforma.services.TrainingService;
-import com.github.anaeliza12.FirstProject.data.vo.v1.PersonVO;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.ArraySchema;
@@ -54,7 +52,7 @@ public class TrainingController {
 	}
 
 	@PostMapping(value = "/v1/subscribe")
-	@Operation(summary = "Subscribe Training", description = "A method that subscribe the actual user by passing JWT access token on Headers and the training in a JSON representation of the training! ", tags = {"Training"},
+	@Operation(summary = "Subscribe Training", description = "A method that subscribe the current user by passing JWT access token on Headers and the training in a JSON representation of the training! ", tags = {"Training"},
 	   responses =  {@ApiResponse( description = "Success" ,responseCode = "200", 
 	   content = {
 			   @Content( mediaType = "application/json",
@@ -87,7 +85,7 @@ public class TrainingController {
 	
 	
 	@DeleteMapping(value = "/v1/delete/{id}")
-	@Operation(summary = "Delete Training", description = "A method that delete a training by passing the given id in path variable! ", tags = {"Training"},
+	@Operation(summary = "Delete Training", description = "c ", tags = {"Training"},
 	   responses =  {@ApiResponse( description = "Success" ,responseCode = "200", 
 	   content = {
 			   @Content( mediaType = "application/json",
@@ -102,7 +100,7 @@ public class TrainingController {
 	}
 
 	@PutMapping(value = "/v1/update/{id}")
-	@Operation(summary = "Delete Training", description = "A method that delete a training by passing the given id in path variable! ", tags = {"Training"},
+	@Operation(summary = "Delete Training", description = "A method that delete a training by passing the id in path variable! ", tags = {"Training"},
 	   responses =  {@ApiResponse( description = "Success" ,responseCode = "200", 
 	   content = {
 			   @Content( mediaType = "application/json",
