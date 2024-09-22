@@ -10,6 +10,31 @@ services:
   - "3306:3306"
   volumes:
   - db_data:/var/lib/mysql
+  - ./database/:/docker-entrypoint-initdb.d/init.sql
+  healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
+ 
+ api-eurofarma:
+  build: .
+  container_name: api_eurofarma_container
+  environment:
+    SPRING_DATASOURCE_URL: jdbc:mysql://localhost:3306/eurofarma
+    SPRING_DATASOURCE_USERNAME: root
+    SPRING_DATASOURCE_PASSWORD: ana.eliza12
+  volumes:
+  - ./src/main/java:/usr/src/app
+  ports:
+  - "3000:3000"
+  depends_on:
+   mysql:
+    condition: service_healthy
+  
+  
+  
   
 
 
