@@ -111,7 +111,7 @@ public class TokenProvider {
 		try {
 			decodedToken = verifier.verify(token);
 		}catch (TokenExpiredException e) {
-			throw new InvalidJwtAuthenticationException("oi");
+			throw new InvalidJwtAuthenticationException("Token Expired");
 		}
 		return decodedToken;
 	}
