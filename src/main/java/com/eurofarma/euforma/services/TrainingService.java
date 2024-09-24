@@ -49,18 +49,11 @@ public class TrainingService {
 	}
 
 	public Training subscribe(Training training) {
-		var user = securityService.getCurrentUsername();
+		var user = (User) securityService.getCurrentUsername();
 		var statusPadrao = "Pendente";
 		Training entity = repository.getReferenceById(training.getId());
 
-		for (UserTraining u : entity.getUserTraining()) {
-			if (u.getTraining().getId() == training.getId()) {
-				userTrainingService.delete(u);
-				return null;
-			}
-		}
-
-		var userTraining = new UserTraining((User) user, training, statusPadrao);
+		var userTraining = new UserTraining(user, training, statusPadrao);
 
 		userTrainingService.create(userTraining);
 
