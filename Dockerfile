@@ -1,9 +1,7 @@
-FROM openjdk:17-jdk-alpine
+FROM openjdk:18-jdk-slim
 
-WORKDIR /usr/src/app
+ARG JAR_FILE=target/*.jar
 
-COPY ./target/euforma-0.0.1-SNAPSHOT.jar .
+COPY ${JAR_FILE} app.jar
 
-EXPOSE 3000
-
-CMD [ "java", "-jar", "euforma-0.0.1-SNAPSHOT.jar" ]
+ENTRYPOINT ["java","-jar","/app.jar"]
