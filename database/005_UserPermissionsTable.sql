@@ -5,7 +5,12 @@ CREATE TABLE `usuario_permissoes` (
   KEY `FKedq70ivilhtvd9htag1006hmx` (`id_user`),
   CONSTRAINT `FK7ktnp2lxifpi58tvm2spktl81` FOREIGN KEY (`id_permission`) REFERENCES `permissoes` (`id`),
   CONSTRAINT `FKedq70ivilhtvd9htag1006hmx` FOREIGN KEY (`id_user`) REFERENCES `usuarios` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB;
+
+SET character_set_client = utf8;
+SET character_set_connection = utf8;
+SET character_set_results = utf8;
+SET collation_connection = utf8_general_ci;
 
 INSERT INTO eurofarma.usuario_permissoes
 VALUES (1,2);

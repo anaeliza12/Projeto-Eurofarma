@@ -31,7 +31,7 @@ services:
   working_dir: /api-eurofarma
   environment:
     TZ: America/Sao_Paulo
-    SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3307/eurofarma?useUnicode=true&characterEncoding=utf8mb4&serverTimezone=UTC
+    SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3307/eurofarma
     SPRING_DATASOURCE_USERNAME: root
     SPRING_DATASOURCE_PASSWORD: ana.eliza12
   container_name: api_eurofarma_container

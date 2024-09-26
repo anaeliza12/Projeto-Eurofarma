@@ -8,22 +8,27 @@ CREATE TABLE `usuarios` (
   `enabled` bit(1) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `UKkfsp0s1tflm1cwlj8idhqsad0` (`email`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB;
+
+SET character_set_client = utf8;
+SET character_set_connection = utf8;
+SET character_set_results = utf8;
+SET collation_connection = utf8_general_ci;
 
 INSERT INTO eurofarma.usuarios
-VALUES (null, "ana.perobelli@eurofarma.com.br",1234, 1,1,1,1);
+VALUES (null, "ana.perobelli@eurofarma.com.br",'c29e18ca269444bc03f1e2baa2282116f0d59a291f1e15dcbdb6cf4db0a3ee1d7cf19bc287e7b1c9', 1,1,1,1);
 
 INSERT INTO eurofarma.usuarios
-VALUES (null, "vini.panessa@eurofarma.com.br",1234, 1,1,1,1);
+VALUES (null, "vini.panessa@eurofarma.com.br",'c29e18ca269444bc03f1e2baa2282116f0d59a291f1e15dcbdb6cf4db0a3ee1d7cf19bc287e7b1c9', 1,1,1,1);
 
 INSERT INTO eurofarma.usuarios
-VALUES (null, "lara.goncalves@eurofarma.com.br",1234, 1,1,1,1);
+VALUES (null, "lara.goncalves@eurofarma.com.br",'c29e18ca269444bc03f1e2baa2282116f0d59a291f1e15dcbdb6cf4db0a3ee1d7cf19bc287e7b1c9', 1,1,1,1);
 
 INSERT INTO eurofarma.usuarios
-VALUES (null, "leo.alves@eurofarma.com.br",1234, 1,1,1,1);
+VALUES (null, "leo.alves@eurofarma.com.br",'c29e18ca269444bc03f1e2baa2282116f0d59a291f1e15dcbdb6cf4db0a3ee1d7cf19bc287e7b1c9', 1,1,1,1);
 
 INSERT INTO eurofarma.usuarios
-VALUES (null, "maria.silva@eurofarma.com.br",1234, 1,1,1,1);
+VALUES (null, "maria.silva@eurofarma.com.br",'c29e18ca269444bc03f1e2baa2282116f0d59a291f1e15dcbdb6cf4db0a3ee1d7cf19bc287e7b1c9', 1,1,1,1);
 
 INSERT INTO eurofarma.usuarios
-VALUES (null, "pedro.santos@eurofarma.com.br",1234, 1,1,1,1);
+VALUES (null, "pedro.santos@eurofarma.com.br",'c29e18ca269444bc03f1e2baa2282116f0d59a291f1e15dcbdb6cf4db0a3ee1d7cf19bc287e7b1c9', 1,1,1,1);
