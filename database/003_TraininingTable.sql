@@ -1,3 +1,23 @@
+CREATE TABLE `treinamentos` (
+  `id` bigint NOT NULL AUTO_INCREMENT,
+  `nome_treinamento` varchar(255) NOT NULL,
+  `departamento_id` bigint NOT NULL,
+  `duracao` varchar(255) NOT NULL,  
+  `data` date NOT NULL,
+  `horario` time(6) NOT NULL,
+  `descricao` varchar(255) NOT NULL,
+  `modalidade` enum('ONLINE','PRESENCIAL') NOT NULL,
+  `local` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `FKhjw29a0p5qqiyifli0j5a555p` (`departamento_id`),
+  CONSTRAINT `FKhjw29a0p5qqiyifli0j5a555p` FOREIGN KEY (`departamento_id`) REFERENCES `departamentos` (`id`)
+) ENGINE=InnoDB;
+
+SET character_set_client = utf8;
+SET character_set_connection = utf8;
+SET character_set_results = utf8;
+SET collation_connection = utf8_general_ci;
+
 INSERT INTO eurofarma.treinamentos
 VALUES (null, "Desenvolvimento de Liderança", 1, "44min", '2024-08-29', '15:30', "Treinamento focado em desenvolver habilidades de liderança, incluindo técnicas de motivação, comunicação eficaz e gestão de equipes. Ideal para líderes atuais e futuros.", "ONLINE", "Sala 11");
 
