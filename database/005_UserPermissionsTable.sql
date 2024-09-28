@@ -19,13 +19,13 @@ INSERT INTO eurofarma.usuario_permissoes
 VALUES (2,2);
 
 INSERT INTO eurofarma.usuario_permissoes
-VALUES (3,2);
+VALUES (2,3);
 
 INSERT INTO eurofarma.usuario_permissoes
-VALUES (4,2);
+VALUES (2,4);
 
 INSERT INTO eurofarma.usuario_permissoes
-VALUES (5,1);
+VALUES (1,5);
 
 INSERT INTO eurofarma.usuario_permissoes
-VALUES (6,1);
+VALUES (1,6);

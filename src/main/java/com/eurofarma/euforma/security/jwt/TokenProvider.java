@@ -33,7 +33,7 @@ public class TokenProvider {
 	@Value("${security.jwt.token.secret-key:secret}")
 	private String secretKey = "secret";
 
-	@Value("${security.jwt.token.expire-length:60000}")
+	@Value("${security.jwt.token.expire-length:360000}")
 	private long validityInMilliSeconds = 60000;
 
 	@Autowired
