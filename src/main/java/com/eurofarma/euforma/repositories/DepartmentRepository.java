@@ -6,6 +6,6 @@ import org.springframework.stereotype.Repository;
 import com.eurofarma.euforma.entities.Departament;
 
 @Repository
-public interface DepartamentRepository extends JpaRepository<Departament, Long> {
+public interface DepartmentRepository extends JpaRepository<Departament, Long> {
 
 }

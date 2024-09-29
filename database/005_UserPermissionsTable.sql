@@ -13,7 +13,7 @@ SET character_set_results = utf8;
 SET collation_connection = utf8_general_ci;
 
 INSERT INTO eurofarma.usuario_permissoes
-VALUES (1,2);
+VALUES (2,2);
 
 INSERT INTO eurofarma.usuario_permissoes
 VALUES (2,2);
@@ -22,7 +22,7 @@ INSERT INTO eurofarma.usuario_permissoes
 VALUES (2,3);
 
 INSERT INTO eurofarma.usuario_permissoes
-VALUES (2,4);
+VALUES (1,4);
 
 INSERT INTO eurofarma.usuario_permissoes
 VALUES (1,5);
