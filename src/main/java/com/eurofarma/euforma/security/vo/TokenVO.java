@@ -14,12 +14,14 @@ public class TokenVO implements Serializable {
 	private Date expiration;
 	private String accessToken;
 	private String refreshToken;
+	private String userType;
+
 
 	public TokenVO() {
 	}
 
 	public TokenVO(String email, Boolean authenticated, Date created, Date expiration, String accessToken,
-			String refreshToken) {
+			String refreshToken, String userType) {
 
 		this.email = email;
 		this.authenticated = authenticated;
@@ -27,6 +29,7 @@ public class TokenVO implements Serializable {
 		this.expiration = expiration;
 		this.accessToken = accessToken;
 		this.refreshToken = refreshToken;
+		this.userType = userType;
 	}
 
 	public String getEmail() {
@@ -77,6 +80,13 @@ public class TokenVO implements Serializable {
 		this.refreshToken = refreshToken;
 	}
 
+	public String getUserType() {
+		return userType;
+	}
+	
+	public void setUserType(String userType) {
+		this.userType = userType;
+	}
 	@Override
 	public int hashCode() {
 		return Objects.hash(accessToken, authenticated, created, expiration, refreshToken, email);

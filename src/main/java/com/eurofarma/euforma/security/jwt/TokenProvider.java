@@ -54,7 +54,7 @@ public class TokenProvider {
 		var accessToken = getAccessToken(username, roles, now, validity);
 		var refreshToken = getRefreshToken(username, roles, now);
 
-		return new TokenVO(username, true, now, validity, accessToken, refreshToken);
+		return new TokenVO(username, true, now, validity, accessToken, refreshToken, roles.get(0));
 	}
 
 	public TokenVO refreshToken(String refreshToken) {
