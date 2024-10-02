@@ -116,7 +116,7 @@ Send a **GET** Request to `http://localhost:8080/api-eurofarma/v1/my-trainings` 
 ### 📥 Download the collection !
 
 
-[![Run Eurofarma collection in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/28811195-e12e9528-6d10-4de2-9b85-06c949a5ea8d)
+[![Run Eurofarma collection in Postman](https://run.pstmn.io/button.svg)](https://elements.getpostman.com/redirect?entityId=28811195-4e6b3daa-fdbd-4810-95cc-b89c73e2e965&entityType=collection)
 
 <br> 
 
