@@ -120,8 +120,10 @@ Send a **GET** Request to `http://localhost:8080/api-eurofarma/v1/my-trainings` 
 
 <br> 
 
+# ![icons8-docker-48](https://github.com/user-attachments/assets/8293aa11-ed3f-469a-93e7-a92028c93b42) Docker repository 
+https://hub.docker.com/repository/docker/anaeliza12/api-eurofarma/general  
 
-
+<br> 
 
 # 📂 Project File Tree
 
@@ -130,12 +132,17 @@ Projeto-Eurofarma/src/main/java/com/eurofarma/eurofarma
 ├── config
 │   └── DataConfig.java
 │   └── SecurityConfig.java
+│   └── WebConfig.java
 │  
 ├── controller
 │   └── AuthController.java
-│   └── 
+│   └── DepartmentController.java
+│   └── TrainingController.java
+│   └── UserTrainingController.java
 │  
 ├── entities
+│       ├── pk
+│           └── UserTrainingPK.java
 │   └── Departament.java
 │   └── Permission.java
 │   └── Training.java
@@ -145,7 +152,9 @@ Projeto-Eurofarma/src/main/java/com/eurofarma/eurofarma
 │── exception
 │       ├── handler
 │           └── CustumizedRespondeEntityExceptionHanldler.java
-│   └── InvalidJwtAuthenticationException.java 
+│   └── InvalidJwtAuthenticationException.java
+│   └── ExceptionResponse.java
+│   └── ResourceNotFoundException.java
 |
 │── repositories
 │       └── DepartamentRepository.java
@@ -162,8 +171,12 @@ Projeto-Eurofarma/src/main/java/com/eurofarma/eurofarma
 │           └── TokenVO.java
 │ 
 |── services
-        └── AuthService.java
-        └── UserService.java
+│        └── AuthService.java
+│        └── UserService.java
+│        └── DepartmentService.java
+│        └── SecurityService.java
+│        └── TrainingService.java
+│        └── UserTrainingService.java
 ```
 
 
