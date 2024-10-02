@@ -37,34 +37,37 @@ mvn spring-boot:run
 
 ## Profile: Admin
 ### Auth
-Send a **POST** Request to `http://localhost:8080/api-eurofarma/v1/login` to log in the site
+Send a **POST** Request to `http://localhost:8080/api-eurofarma/auth/v1/login` to log in the site
 
 **Admin Object DTO**
 ```json
 {
-      "id": "1",
-      "email": "anne.santos@eurofarma.com.br",
-      "password": "123admin"
+      "email": "pedro.santos@eurofarma.com.br",
+      "password": "admin123"
 }
 
 ```
 <br>
 
 ### Trainings
-Send a **POST** Request to `http://localhost:8080/api-eurofarma/v1/trainings` to return all avaible training
+Send a **POST** Request to `http://localhost:8080/api-eurofarma/training/v1/all` to return all avaible training
 
 **Training Object**
 ```json
 {
-      "id": "7",
-      "name": "Auditoria de Qualidade",
-      "department": 4,
-      "duration": "50min",
-      "date": "2025-02-08",
-      "time": "15:50:00",
-      "description": "Técnicas e procedimentos para realizar auditorias de qualidade, identificando não conformidades e oportunidades de melhoria.",
-      "modality": "On-line",
-      "local": "Teams"
+      "id": 1,
+        "name": "Desenvolvimento de Liderança",
+        "department": {
+            "id": 1,
+            "name": "Recursos Humanos "
+        },
+        "duration": "44min",
+        "date": "2024-08-29",
+        "time": "15:30:00",
+        "description": "Treinamento focado em desenvolver habilidades de liderança, incluindo técnicas de motivação, comunicação eficaz e gestão de equipes. Ideal para líderes atuais e futuros.",
+        "modality": "On-line",
+        "local": "Sala 11",
+        "userTraining": []
 }
 
 ```
